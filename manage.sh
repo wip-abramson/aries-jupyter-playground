@@ -1,6 +1,8 @@
 #!/bin/bash
 export MSYS_NO_PATHCONV=1
 export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host codenvy/che-ip)}
+
+
 set -e
 
 S2I_EXE=s2i
@@ -62,7 +64,9 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic alice-wallet-db ngrok-alice alice-agent alice-business-logic"
+DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic
+                    alice-wallet-db ngrok-alice alice-agent alice-business-logic
+                    tails-server"
 
 # DEFAULT_CONTAINERS="bob-agent alice-agent"
 # -----------------------------------------------------------------------------------------------------------------
