@@ -32,6 +32,13 @@ Then run:
 
 This spins up all docker containers defined in the `docker-compose.yml` file and named in the DEFAULT_CONTAINERS variable defined in the `manage.sh` shell script.
 
+To stop the playground either:
+
+`./manage.sh stop` - this terminates the containers but persists the volumes in the postgres-db
+
+`./manage.sh down` - terminate containers and delete all volumes
+
+
 ## Configuring the Playground
 
 The playground is designed to make it easy for you to add new actors and start writing SSI ecosystem flows. 
