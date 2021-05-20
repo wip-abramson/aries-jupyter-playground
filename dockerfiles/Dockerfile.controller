@@ -11,7 +11,11 @@ RUN apt-get update && apt-get install -y gcc
 RUN conda install -c conda-forge jupyterlab==3.0.11
 
 # Install the aries_cloudcontroller
-RUN pip install aries_cloudcontroller
+
+ADD requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
+
 
 
 # Create jupyter notebook workspace
