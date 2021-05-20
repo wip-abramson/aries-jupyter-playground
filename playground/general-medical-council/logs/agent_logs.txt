@@ -1,0 +1,732 @@
+Using selector: EpollSelector
+Loaded module: aries_cloudagent.protocols.out_of_band
+Loaded module: aries_cloudagent.protocols.discovery
+Loaded module: aries_cloudagent.protocols.basicmessage
+Loaded module: aries_cloudagent.protocols.trustping
+Loaded module: aries_cloudagent.protocols.connections
+Loaded module: aries_cloudagent.protocols.problem_report
+Loaded module: aries_cloudagent.protocols.coordinate_mediation
+Loaded module: aries_cloudagent.protocols.didexchange
+Loaded module: aries_cloudagent.protocols.present_proof
+Loaded module: aries_cloudagent.protocols.issue_credential
+Loaded module: aries_cloudagent.protocols.routing
+Loaded module: aries_cloudagent.protocols.actionmenu
+Loaded module: aries_cloudagent.protocols.introduction
+Loaded module: aries_cloudagent.holder
+Loaded module: aries_cloudagent.ledger
+Loaded module: aries_cloudagent.messaging.credential_definitions
+Loaded module: aries_cloudagent.messaging.schemas
+Loaded module: aries_cloudagent.revocation
+Loaded module: aries_cloudagent.wallet
+Reading ledger genesis transactions from: /home/indy/genesis-txns
+Create profile manager: indy
+Checking input postgres storage_config and storage_creds arguments
+Initializing postgres wallet
+Success, loaded postgres wallet storage
+open_wallet: >>> config: '{"id": "GMC", "freshness_time": false, "storage_type": "postgres_storage", "storage_config": {"url": "general-medical-council-wallet-db:5432", "wallet_scheme": "MultiWalletSingleTable"}}', credentials: '{"key": "gmc_key", "key_derivation_method": "ARGON2I_MOD", "storage_credentials": {"account": "postgres", "password": "dbpass", "admin_account": "postgres", "admin_password": "dbpass"}}'
+open_wallet: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493e1d8>
+do_call: >>> name: indy_open_wallet, args: (c_char_p(140702999698576), c_char_p(140702937011376), <CFunctionType object at 0x7ff7f493e1d8>)
+_load_cdll: >>>
+_load_cdll: Detected OS name: linux
+_load_cdll: Resolved libindy name is: libindy.so
+_load_cdll: <<< res: <CDLL 'libindy.so', handle 560318b4c2a0 at 0x7ff7f493db70>
+set_logger: >>>
+do_call_sync: >>> name: indy_set_logger, args: (None, None, <CFunctionType object at 0x7ff7f493e2a0>, None)
+do_call_sync: <<< 0
+set_logger: <<<
+do_call: Function indy_open_wallet returned err: 0
+do_call: <<< <Future pending>
+	src/postgres_storage.rs:897 | wallet_db_name: "wallets"
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT value FROM metadata WHERE wallet_id = $1
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: ["GMC"]
+_get_error_details: >>>
+_get_error_details: <<< error_details: {'backtrace': '', 'message': 'Error: Wallet not found\n  Caused by: Plugin returned error\n'}
+_indy_callback: >>> command_handle: 0, err , args: (0,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 0, err , args: (0,)
+_indy_loop_callback: Function returned error 
+_indy_loop_callback <<<
+create_wallet: >>> config: '{"id": "GMC", "freshness_time": false, "storage_type": "postgres_storage", "storage_config": {"url": "general-medical-council-wallet-db:5432", "wallet_scheme": "MultiWalletSingleTable"}}', credentials: '{"key": "gmc_key", "key_derivation_method": "ARGON2I_MOD", "storage_credentials": {"account": "postgres", "password": "dbpass", "admin_account": "postgres", "admin_password": "dbpass"}}'
+create_wallet: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493e4f8>
+do_call: >>> name: indy_create_wallet, args: (c_char_p(140702937011600), c_char_p(140702937011824), <CFunctionType object at 0x7ff7f493e4f8>)
+do_call: Function indy_create_wallet returned err: 0
+do_call: <<< <Future pending>
+	src/postgres_storage.rs:867 | wallet_db_name: "wallets"
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: INSERT INTO metadata(wallet_id, value) VALUES($1, $2)
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: ["GMC", [101, 121, 74, 114, 90, 88, 108, 122, 73, 106, 112, 98, 77, 106, 81, 53, 76, 68, 69, 51, 76, 68, 99, 115, 77, 84, 65, 122, 76, 68, 73, 121, 77, 83, 119, 120, 77, 68, 103, 115, 77, 106, 65, 120, 76, 68, 85, 122, 76, 68, 107, 51, 76, 68, 69, 49, 79, 83, 119, 121, 77, 106, 77, 115, 78, 68, 103, 115, 77, 122, 85, 115, 77, 106, 77, 120, 76, 68, 73, 49, 77, 105, 119, 121, 78, 68, 73, 115, 77, 84, 99, 48, 76, 68, 77, 49, 76, 68, 73, 119, 79, 67, 119, 120, 77, 84, 99, 115, 79, 84, 73, 115, 77, 106, 73, 115, 77, 84, 77, 53, 76, 68, 81, 122, 76, 68, 69, 49, 78, 105, 119, 120, 78, 68, 107, 115, 77, 106, 81, 48, 76, 68, 73, 49, 77, 121, 119, 120, 78, 84, 85, 115, 77, 84, 99, 49, 76, 68, 81, 120, 76, 68, 77, 50, 76, 68, 69, 49, 76, 68, 69, 122, 78, 67, 119, 49, 78, 83, 119, 120, 78, 68, 69, 115, 77, 84, 81, 49, 76, 68, 103, 53, 76, 68, 73, 122, 77, 67, 119, 53, 77, 67, 119, 121, 77, 122, 77, 115, 77, 84, 69, 120, 76, 68, 69, 51, 77, 67, 119, 122, 77, 83, 119, 48, 77, 83, 119, 121, 77, 83, 119, 121, 77, 68, 73, 115, 77, 84, 99, 52, 76, 68, 103, 51, 76, 68, 69, 53, 77, 83, 119, 120, 78, 68, 99, 115, 77, 84, 89, 48, 76, 68, 69, 120, 78, 67, 119, 121, 78, 84, 85, 115, 79, 67, 119, 121, 78, 68, 65, 115, 77, 84, 85, 48, 76, 68, 69, 122, 79, 67, 119, 121, 77, 122, 107, 115, 77, 84, 89, 119, 76, 68, 81, 48, 76, 68, 69, 49, 77, 67, 119, 51, 79, 67, 119, 50, 78, 105, 119, 120, 78, 106, 65, 115, 77, 106, 85, 48, 76, 68, 73, 48, 77, 67, 119, 121, 77, 68, 107, 115, 77, 84, 89, 53, 76, 68, 69, 51, 78, 83, 119, 120, 79, 84, 103, 115, 78, 84, 99, 115, 77, 84, 77, 53, 76, 68, 81, 115, 78, 84, 103, 115, 77, 106, 89, 115, 77, 84, 107, 119, 76, 68, 69, 120, 78, 83, 119, 48, 76, 68, 69, 120, 78, 83, 119, 120, 78, 106, 65, 115, 77, 106, 65, 51, 76, 68, 73, 49, 77, 121, 119, 48, 77, 67, 119, 120, 77, 122, 73, 115, 77, 84, 107, 121, 76, 68, 69, 51, 76, 68, 65, 115, 77, 84, 99, 51, 76, 68, 69, 49, 76, 68, 69, 51, 77, 105, 119, 121, 77, 84, 89, 115, 77, 106, 73, 48, 76, 68, 73, 122, 78, 105, 119, 120, 78, 122, 99, 115, 77, 84, 77, 119, 76, 68, 69, 119, 79, 67, 119, 120, 78, 68, 65, 115, 77, 106, 73, 49, 76, 68, 107, 51, 76, 68, 73, 120, 79, 83, 119, 51, 77, 67, 119, 120, 78, 122, 89, 115, 77, 84, 65, 51, 76, 68, 69, 53, 77, 105, 119, 120, 78, 68, 85, 115, 77, 84, 107, 122, 76, 68, 73, 49, 77, 83, 119, 120, 77, 67, 119, 122, 79, 83, 119, 120, 77, 106, 81, 115, 77, 84, 77, 52, 76, 68, 73, 121, 77, 83, 119, 121, 77, 106, 89, 115, 77, 106, 107, 115, 77, 84, 65, 121, 76, 68, 73, 122, 76, 68, 69, 49, 78, 105, 119, 121, 77, 122, 69, 115, 79, 68, 69, 115, 77, 84, 89, 115, 77, 84, 77, 49, 76, 68, 107, 49, 76, 68, 69, 50, 77, 121, 119, 53, 77, 67, 119, 121, 78, 84, 69, 115, 78, 68, 103, 115, 77, 84, 81, 115, 77, 106, 73, 53, 76, 68, 69, 120, 77, 67, 119, 120, 79, 84, 107, 115, 77, 84, 99, 50, 76, 68, 73, 51, 76, 68, 85, 51, 76, 68, 107, 120, 76, 68, 99, 53, 76, 68, 107, 52, 76, 68, 85, 53, 76, 68, 73, 121, 77, 105, 119, 51, 79, 83, 119, 51, 77, 121, 119, 120, 77, 122, 77, 115, 78, 84, 73, 115, 77, 84, 99, 51, 76, 68, 73, 121, 78, 105, 119, 122, 77, 121, 119, 121, 77, 106, 69, 115, 77, 84, 89, 53, 76, 68, 77, 122, 76, 68, 69, 53, 77, 105, 119, 120, 77, 84, 99, 115, 77, 84, 69, 121, 76, 68, 73, 49, 78, 83, 119, 48, 79, 67, 119, 120, 78, 122, 77, 115, 77, 122, 73, 115, 77, 84, 73, 51, 76, 68, 77, 53, 76, 68, 69, 48, 78, 105, 119, 52, 77, 83, 119, 120, 79, 84, 99, 115, 77, 84, 77, 120, 76, 68, 69, 121, 78, 83, 119, 121, 77, 122, 77, 115, 77, 106, 77, 49, 76, 68, 107, 51, 76, 68, 85, 51, 76, 68, 85, 48, 76, 68, 69, 53, 76, 68, 107, 115, 79, 68, 73, 115, 77, 106, 73, 122, 76, 68, 103, 53, 76, 68, 73, 120, 79, 83, 119, 49, 77, 121, 119, 53, 78, 105, 119, 121, 77, 68, 69, 115, 78, 106, 85, 115, 78, 106, 65, 115, 77, 106, 65, 120, 76, 68, 73, 49, 77, 121, 119, 120, 77, 83, 119, 53, 78, 67, 119, 120, 77, 68, 73, 115, 77, 84, 81, 121, 76, 68, 69, 49, 77, 67, 119, 120, 79, 68, 81, 115, 79, 84, 85, 115, 78, 106, 81, 115, 78, 122, 107, 115, 78, 106, 81, 115, 77, 84, 99, 53, 76, 68, 89, 115, 77, 106, 85, 115, 77, 84, 107, 49, 76, 68, 73, 122, 78, 105, 119, 120, 77, 122, 99, 115, 77, 84, 89, 119, 76, 68, 69, 121, 76, 68, 103, 51, 76, 68, 73, 48, 77, 121, 119, 121, 77, 84, 73, 115, 77, 84, 81, 48, 76, 68, 73, 119, 77, 83, 119, 121, 77, 122, 89, 115, 77, 106, 65, 51, 76, 68, 69, 122, 78, 83, 119, 120, 79, 84, 107, 115, 77, 106, 65, 120, 76, 68, 69, 50, 79, 83, 119, 121, 77, 106, 69, 115, 77, 84, 107, 121, 76, 68, 103, 48, 76, 68, 69, 120, 77, 121, 119, 120, 77, 84, 73, 115, 77, 84, 99, 52, 76, 68, 69, 119, 78, 83, 119, 120, 78, 106, 73, 115, 77, 84, 81, 119, 76, 68, 69, 119, 78, 121, 119, 120, 78, 122, 99, 115, 77, 84, 69, 52, 76, 68, 85, 115, 77, 84, 99, 121, 76, 68, 85, 48, 76, 68, 81, 121, 76, 68, 69, 119, 78, 83, 119, 120, 78, 84, 65, 115, 77, 84, 73, 121, 76, 68, 107, 50, 76, 68, 73, 119, 79, 67, 119, 120, 79, 84, 99, 115, 78, 122, 81, 115, 77, 106, 77, 48, 76, 68, 73, 120, 78, 105, 119, 50, 77, 105, 119, 120, 79, 68, 107, 115, 77, 84, 103, 120, 76, 68, 73, 122, 79, 67, 119, 52, 77, 83, 119, 120, 77, 68, 89, 115, 78, 122, 65, 115, 78, 122, 103, 115, 78, 84, 85, 115, 77, 106, 77, 50, 76, 68, 103, 48, 76, 68, 73, 121, 76, 68, 69, 121, 77, 105, 119, 121, 77, 106, 69, 115, 77, 106, 89, 115, 77, 83, 119, 121, 77, 84, 89, 115, 77, 106, 89, 115, 78, 122, 81, 115, 78, 67, 119, 120, 77, 84, 107, 115, 77, 105, 119, 121, 78, 68, 73, 115, 77, 84, 99, 52, 76, 68, 77, 51, 76, 68, 85, 121, 76, 68, 73, 121, 78, 67, 119, 120, 77, 68, 73, 115, 79, 84, 65, 115, 77, 122, 103, 115, 77, 84, 99, 49, 76, 68, 69, 121, 77, 49, 48, 115, 73, 109, 49, 104, 99, 51, 82, 108, 99, 108, 57, 114, 90, 88, 108, 102, 99, 50, 70, 115, 100, 67, 73, 54, 87, 122, 73, 48, 79, 83, 119, 121, 77, 84, 65, 115, 78, 106, 77, 115, 77, 106, 81, 51, 76, 68, 73, 49, 76, 68, 69, 49, 77, 105, 119, 48, 77, 121, 119, 121, 77, 106, 99, 115, 77, 84, 103, 119, 76, 68, 99, 120, 76, 68, 73, 48, 77, 67, 119, 120, 77, 106, 81, 115, 77, 106, 73, 50, 76, 68, 73, 122, 78, 83, 119, 51, 79, 67, 119, 121, 77, 106, 89, 115, 77, 122, 73, 115, 77, 106, 73, 50, 76, 68, 89, 50, 76, 68, 73, 119, 77, 67, 119, 50, 79, 83, 119, 48, 78, 67, 119, 120, 78, 84, 81, 115, 77, 106, 89, 115, 77, 106, 77, 51, 76, 68, 69, 52, 77, 105, 119, 122, 77, 67, 119, 120, 77, 106, 85, 115, 77, 84, 99, 53, 76, 68, 89, 49, 76, 68, 89, 119, 76, 68, 73, 119, 78, 108, 49, 57]]
+_indy_callback: >>> command_handle: 1, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 1, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+create_wallet: <<<
+open_wallet: >>> config: '{"id": "GMC", "freshness_time": false, "storage_type": "postgres_storage", "storage_config": {"url": "general-medical-council-wallet-db:5432", "wallet_scheme": "MultiWalletSingleTable"}}', credentials: '{"key": "gmc_key", "key_derivation_method": "ARGON2I_MOD", "storage_credentials": {"account": "postgres", "password": "dbpass", "admin_account": "postgres", "admin_password": "dbpass"}}'
+do_call: >>> name: indy_open_wallet, args: (c_char_p(140702937011824), c_char_p(140702937011600), <CFunctionType object at 0x7ff7f493e1d8>)
+do_call: Function indy_open_wallet returned err: 0
+do_call: <<< <Future pending>
+	src/postgres_storage.rs:897 | wallet_db_name: "wallets"
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT value FROM metadata WHERE wallet_id = $1
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: ["GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT value FROM metadata WHERE wallet_id = $1
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: ["GMC"]
+_indy_callback: >>> command_handle: 2, err , args: (3,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 2, err , args: (3,)
+_indy_loop_callback: Function returned 3
+_indy_loop_callback <<<
+open_wallet: <<< res: 3
+Creating master secret...
+prover_create_master_secret: >>> wallet_handle: 3, master_secret_name: 'GMC'
+prover_create_master_secret: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493e688>
+do_call: >>> name: indy_prover_create_master_secret, args: (c_int(3), c_char_p(140702937374064), <CFunctionType object at 0x7ff7f493e688>)
+do_call: Function indy_prover_create_master_secret returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 113, 66, 55, 98, 83, 57, 98, 98, 114, 109, 79, 115, 89, 78, 88, 107, 105, 105, 110, 106, 90, 72, 82, 107, 47, 101, 70, 76, 52, 103, 70, 66, 113, 51, 48, 114, 106, 66, 116, 54, 99, 120, 83, 80, 53, 54, 65, 70, 50, 102, 122, 87, 87, 84, 68, 85, 98, 118, 101, 119, 81, 61, 61], [53, 101, 43, 77, 87, 118, 65, 75, 54, 67, 99, 57, 71, 55, 47, 114, 47, 113, 114, 55, 66, 57, 104, 89, 89, 98, 56, 115, 53, 113, 48, 101, 47, 67, 78, 65, 76, 88, 79, 102, 106, 81, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: START TRANSACTION
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s0`: INSERT INTO items (type, name, value, key, wallet_id) VALUES ($1, $2, $3, $4, $5) RETURNING id
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s0 with parameters: [[48, 113, 66, 55, 98, 83, 57, 98, 98, 114, 109, 79, 115, 89, 78, 88, 107, 105, 105, 110, 106, 90, 72, 82, 107, 47, 101, 70, 76, 52, 103, 70, 66, 113, 51, 48, 114, 106, 66, 116, 54, 99, 120, 83, 80, 53, 54, 65, 70, 50, 102, 122, 87, 87, 84, 68, 85, 98, 118, 101, 119, 81, 61, 61], [53, 101, 43, 77, 87, 118, 65, 75, 54, 67, 99, 57, 71, 55, 47, 114, 47, 113, 114, 55, 66, 57, 104, 89, 89, 98, 56, 115, 53, 113, 48, 101, 47, 67, 78, 65, 76, 88, 79, 102, 106, 81, 61, 61], [86, 163, 178, 153, 112, 4, 206, 68, 206, 167, 101, 10, 102, 95, 56, 94, 80, 59, 158, 103, 171, 55, 100, 169, 66, 68, 96, 218, 24, 229, 134, 214, 82, 166, 189, 50, 211, 162, 90, 246, 253, 117, 101, 100, 212, 60, 238, 21, 233, 139, 211, 233, 39, 215, 66, 41, 40, 76, 143, 32, 25, 90, 198, 45, 240, 113, 193, 90, 164, 62, 13, 179, 208, 227, 80, 244, 64, 244, 77, 215, 244, 168, 80, 113, 73, 37, 34, 167, 98, 21, 190, 190, 131, 109, 40, 53, 131, 146, 180, 29, 92, 35, 76, 206, 171, 55, 47, 54, 82, 131, 154, 1, 185, 141, 199, 168, 139, 86, 248, 156, 100, 184, 118, 193], [102, 68, 240, 164, 234, 194, 136, 218, 38, 21, 175, 169, 254, 203, 157, 216, 252, 178, 142, 131, 252, 27, 240, 209, 60, 164, 187, 57, 106, 18, 75, 136, 217, 176, 242, 3, 42, 134, 42, 98, 49, 158, 173, 57, 184, 177, 10, 92, 177, 95, 1, 216, 73, 96, 164, 252, 79, 150, 84, 166], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: COMMIT
+_indy_callback: >>> command_handle: 3, err , args: (b'GMC',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 3, err , args: (b'GMC',)
+_indy_loop_callback: Function returned b'GMC'
+_indy_loop_callback <<<
+prover_create_master_secret: <<< res: 'GMC'
+list_my_dids_with_meta: >>> wallet_handle: 3
+list_my_dids_with_meta: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493e818>
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s0`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s0 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s1`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s1 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s1`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s1 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 4, err , args: (b'[]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 4, err , args: (b'[]',)
+_indy_loop_callback: Function returned b'[]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[]'
+list_my_dids_with_meta: >>> wallet_handle: 3
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s2`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s2 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s2`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s2 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s3`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s3 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 5, err , args: (b'[]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 5, err , args: (b'[]',)
+_indy_loop_callback: Function returned b'[]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[]'
+create_and_store_my_did: >>> wallet_handle: 3, did_json: '{"seed": "MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMEdNQ0FueTE="}'
+create_wallet: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493e9a8>
+do_call: >>> name: indy_create_and_store_my_did, args: (c_int(3), c_char_p(140702937095536), <CFunctionType object at 0x7ff7f493e9a8>)
+do_call: Function indy_create_and_store_my_did returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: START TRANSACTION
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s0 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], [183, 180, 31, 248, 90, 209, 41, 183, 213, 223, 127, 130, 163, 50, 30, 152, 53, 220, 232, 214, 112, 154, 9, 155, 122, 232, 88, 131, 74, 112, 119, 202, 136, 222, 65, 20, 87, 59, 140, 112, 37, 185, 38, 101, 127, 227, 132, 194, 133, 236, 21, 146, 74, 141, 169, 12, 81, 175, 23, 192, 111, 128, 173, 128, 190, 37, 161, 103, 85, 115, 104, 76, 63, 110, 44, 204, 0, 19, 93, 24, 97, 71, 176, 1, 226, 5, 202, 67, 109, 164, 217, 166, 224, 35, 134, 187, 157, 103, 40, 75, 115, 74, 185, 199, 93, 143, 84, 255, 239, 250, 46, 17, 52, 132, 55, 250], [46, 144, 119, 49, 111, 169, 130, 142, 47, 28, 185, 180, 53, 168, 200, 245, 170, 231, 33, 221, 94, 45, 238, 138, 38, 156, 184, 244, 3, 119, 136, 96, 114, 56, 201, 130, 161, 111, 113, 238, 77, 106, 177, 230, 31, 186, 113, 83, 96, 59, 89, 33, 208, 70, 133, 187, 207, 125, 6, 20], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: COMMIT
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: START TRANSACTION
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s0 with parameters: [[105, 87, 75, 108, 81, 105, 72, 86, 115, 115, 73, 90, 119, 69, 87, 77, 56, 76, 102, 113, 73, 97, 71, 122, 52, 47, 106, 90, 103, 113, 117, 107, 83, 97, 89, 55, 48, 106, 72, 43, 98, 103, 115, 50, 53, 77, 105, 49, 76, 81, 61, 61], [122, 110, 99, 99, 56, 79, 90, 100, 55, 82, 110, 56, 83, 81, 99, 43, 83, 108, 53, 54, 120, 89, 102, 74, 103, 73, 119, 87, 122, 104, 117, 114, 112, 111, 106, 110, 106, 51, 75, 69, 67, 54, 103, 50, 85, 112, 79, 104, 43, 120, 113, 122, 52, 48, 113, 77, 47, 43, 98, 112, 109, 81, 119, 77, 110, 67, 98, 56, 56, 79, 56, 116, 99, 75, 78, 99, 55, 90, 98, 73, 72, 69, 102, 102, 98, 69, 119, 56, 74, 90, 50, 85, 115, 81, 104, 110], [32, 101, 97, 111, 1, 76, 15, 240, 114, 118, 116, 147, 238, 229, 4, 195, 136, 30, 144, 64, 254, 107, 76, 89, 187, 150, 0, 152, 198, 185, 72, 232, 105, 25, 160, 153, 169, 137, 136, 168, 118, 71, 51, 126, 90, 178, 190, 15, 84, 85, 206, 110, 178, 96, 8, 253, 63, 25, 170, 106, 8, 197, 132, 172, 37, 231, 201, 31, 64, 182, 250, 156, 134, 108, 110, 222, 231, 140, 34, 52, 70, 4, 181, 148, 195, 89, 19, 85, 51, 178, 233, 142, 154, 106, 211, 76, 175, 236, 103, 54, 85, 97, 16, 0, 164, 133, 28, 5, 34, 252, 175, 34, 78, 76, 40, 203, 15, 114, 215, 128, 93, 234, 124, 244, 184, 12, 218, 94, 12, 248, 85, 120, 234, 126, 17, 146, 89, 51, 51, 182, 201, 44, 227, 35, 246, 222, 143, 64, 61, 16, 252, 175, 56, 209, 111, 118, 159, 109, 67, 203, 244, 95, 113, 5, 48, 166, 244, 7, 41, 221, 159, 199, 229, 62, 12, 54, 69, 166, 32, 71, 124, 188, 114, 33, 158], [186, 18, 103, 220, 156, 245, 120, 106, 19, 108, 28, 45, 3, 113, 206, 69, 72, 156, 25, 78, 238, 232, 79, 163, 184, 226, 37, 26, 128, 160, 160, 217, 163, 55, 196, 71, 8, 244, 49, 12, 77, 167, 235, 97, 164, 95, 9, 7, 146, 108, 76, 232, 194, 227, 63, 191, 77, 183, 192, 34], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: COMMIT
+_indy_callback: >>> command_handle: 6, err , args: (b'TDAbSf3Uqebg8N4XvybMbg', b'FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2')
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 6, err , args: (b'TDAbSf3Uqebg8N4XvybMbg', b'FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2')
+_indy_loop_callback: Function returned (b'TDAbSf3Uqebg8N4XvybMbg', b'FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2')
+_indy_loop_callback <<<
+create_and_store_my_did: <<< res: ('TDAbSf3Uqebg8N4XvybMbg', 'FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2')
+get_my_did_with_meta: >>> wallet_handle: 3, did: 'TDAbSf3Uqebg8N4XvybMbg'
+get_my_did_with_meta: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493eb38>
+do_call: >>> name: indy_get_my_did_with_meta, args: (c_int(3), c_char_p(140702894782232), <CFunctionType object at 0x7ff7f493eb38>)
+do_call: Function indy_get_my_did_with_meta returned err: 0
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+_indy_callback: >>> command_handle: 7, err , args: (b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":null}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 7, err , args: (b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":null}',)
+_indy_loop_callback: Function returned b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":null}'
+_indy_loop_callback <<<
+get_my_did_with_meta: <<< res: '{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":null}'
+set_did_metadata: >>> wallet_handle: 3, did: 'TDAbSf3Uqebg8N4XvybMbg', metadata: '{"public": true, "posted": true}'
+set_did_metadata: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493ecc8>
+do_call: >>> name: indy_set_did_metadata, args: (c_int(3), c_char_p(140702894781896), c_char_p(140702894832960), <CFunctionType object at 0x7ff7f493ecc8>)
+do_call: Function indy_set_did_metadata returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: START TRANSACTION
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s0 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], [179, 13, 173, 222, 133, 182, 130, 254, 224, 249, 152, 200, 185, 171, 178, 65, 29, 96, 188, 89, 181, 162, 90, 140, 251, 10, 235, 184, 84, 182, 59, 162, 76, 124, 35, 185, 214, 249, 33, 126, 138, 250, 111, 171, 164, 5, 249, 96, 99, 194, 215, 66, 242, 21, 132, 75, 221, 90, 54, 224, 12, 224, 21, 174, 198, 252, 153, 118, 167, 185, 115, 14, 167, 87, 134, 33], [35, 99, 150, 130, 216, 251, 8, 87, 66, 18, 88, 196, 191, 102, 123, 146, 190, 206, 20, 134, 91, 169, 181, 196, 196, 186, 149, 150, 170, 77, 213, 131, 148, 166, 123, 148, 23, 240, 204, 77, 18, 230, 114, 229, 110, 67, 9, 152, 207, 69, 241, 94, 203, 122, 146, 50, 208, 79, 244, 67], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: COMMIT
+_indy_callback: >>> command_handle: 8, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 8, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+set_did_metadata: <<<
+Opening the pool ledger
+list_pools: >>> 
+list_pools: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f493ef20>
+do_call: >>> name: indy_list_pools, args: (<CFunctionType object at 0x7ff7f493ef20>,)
+do_call: Function indy_list_pools returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 9, err , args: (b'[]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 9, err , args: (b'[]',)
+_indy_loop_callback: Function returned b'[]'
+_indy_loop_callback <<<
+list_pools: <<< res: []
+Creating pool ledger config
+create_pool_ledger_config: >>> config_name: 'default', config: '{"genesis_txn": "/tmp/default_indy_genesis_transactions.txt"}'
+create_pool_ledger_config: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f21161d8>
+do_call: >>> name: indy_create_pool_ledger_config, args: (c_char_p(140702937018928), c_char_p(140702937095728), <CFunctionType object at 0x7ff7f21161d8>)
+do_call: Function indy_create_pool_ledger_config returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 10, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 10, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+create_pool_ledger_config: <<< res: None
+set_protocol_version: >>> protocol_version: 2
+set_protocol_version: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2116430>
+do_call: >>> name: indy_set_protocol_version, args: (2, <CFunctionType object at 0x7ff7f2116430>)
+do_call: Function indy_set_protocol_version returned err: 0
+_indy_callback: >>> command_handle: 11, err , args: ()
+do_call: <<< <Future pending>
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 11, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+set_protocol_version: <<< res: None
+open_pool_ledger: >>> config_name: 'default', config: '{}'
+open_pool_ledger: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f21165c0>
+do_call: >>> name: indy_open_pool_ledger, args: (c_char_p(140702937018888), c_char_p(140702937018928), <CFunctionType object at 0x7ff7f21165c0>)
+do_call: Function indy_open_pool_ledger returned err: 0
+do_call: <<< <Future pending>
+	src/commands/pool.rs:75 | OpenAck handle 4, pool_id 4, result Ok(())
+_indy_callback: >>> command_handle: 12, err , args: (4,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 12, err , args: (4,)
+_indy_loop_callback: Function returned 4
+_indy_loop_callback <<<
+open_pool_ledger: <<< res: 4
+list_my_dids_with_meta: >>> wallet_handle: 3
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s3`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s3 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s4`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s4 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s4`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s4 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 13, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 13, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_loop_callback: Function returned b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+build_get_acceptance_mechanisms_request: >>> submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', timestamp: None, version: None
+build_get_acceptance_mechanisms_request: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2116750>
+do_call: >>> name: indy_build_get_acceptance_mechanisms_request, args: (c_char_p(140702894781448), c_long(-1), None, <CFunctionType object at 0x7ff7f2116750>)
+do_call: Function indy_build_get_acceptance_mechanisms_request returned err: 0
+do_call: <<< <Future pending>
+	src/services/ledger/mod.rs:449 | build_get_acceptance_mechanisms_request() => Ok("{\"reqId\":1621523686139958128,\"identifier\":\"TDAbSf3Uqebg8N4XvybMbg\",\"operation\":{\"type\":\"7\"},\"protocolVersion\":2}")
+_indy_callback: >>> command_handle: 14, err , args: (b'{"reqId":1621523686139958128,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"7"},"protocolVersion":2}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 14, err , args: (b'{"reqId":1621523686139958128,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"7"},"protocolVersion":2}',)
+_indy_loop_callback: Function returned b'{"reqId":1621523686139958128,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"7"},"protocolVersion":2}'
+_indy_loop_callback <<<
+build_get_acceptance_mechanisms_request: <<< res: '{"reqId":1621523686139958128,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"7"},"protocolVersion":2}'
+open_wallet_search: >>> wallet_handle: 3, type_: 'taa_accepted', query_json: '{"pool_name": "default"}', options_json: '{"retrieveRecords": true, "retrieveTotalCount": false, "retrieveType": false, "retrieveValue": true, "retrieveTags": true}'
+open_wallet_search: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f21169a8>
+do_call: >>> name: indy_open_wallet_search, args: (c_int(3), c_char_p(140702937117712), c_char_p(140702937003600), c_char_p(140702938512592), <CFunctionType object at 0x7ff7f21169a8>)
+do_call: Function indy_open_wallet_search returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s5`: WITH tags_encrypted as (select * from tags_encrypted where wallet_id = $5) SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND (i.id in (SELECT item_id FROM tags_encrypted WHERE name = $2 AND value = $3)) AND i.wallet_id = $4
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s0`: SELECT name, value from tags_plaintext where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s1`: SELECT name, value from tags_encrypted where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s5 with parameters: [[107, 82, 83, 53, 48, 52, 77, 97, 51, 104, 111, 54, 120, 115, 85, 78, 118, 74, 90, 105, 82, 80, 108, 56, 75, 114, 77, 86, 65, 89, 115, 81, 65, 116, 76, 109, 48, 113, 50, 85, 121, 80, 108, 108, 86, 68, 52, 48, 85, 55, 56, 76, 118, 81, 61, 61], [59, 78, 218, 243, 129, 94, 168, 233, 72, 111, 71, 200, 78, 7, 242, 104, 78, 145, 181, 61, 195, 15, 152, 13, 87, 178, 176, 199, 76, 207, 197, 99, 114, 84, 250, 136, 0], [62, 6, 39, 43, 11, 118, 170, 142, 81, 1, 26, 214, 211, 208, 47, 23, 128, 222, 243, 246, 121, 75, 136, 72, 63, 157, 104, 122, 50, 88, 241, 136, 6, 107, 208], "GMC", "GMC"]
+_indy_callback: >>> command_handle: 15, err , args: (6,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 15, err , args: (6,)
+_indy_loop_callback: Function returned 6
+_indy_loop_callback <<<
+open_wallet_search: <<< res: 6
+fetch_wallet_search_next_records: >>> wallet_handle: 3, wallet_search_handle: 6, count: 100
+fetch_wallet_search_next_records: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2116a70>
+do_call: >>> name: indy_fetch_wallet_search_next_records, args: (c_int(3), c_int(6), c_uint(100), <CFunctionType object at 0x7ff7f2116a70>)
+do_call: Function indy_fetch_wallet_search_next_records returned err: 0
+_indy_callback: >>> command_handle: 16, err , args: (b'{"totalCount":null,"records":null}',)
+do_call: <<< <Future pending>
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 16, err , args: (b'{"totalCount":null,"records":null}',)
+_indy_loop_callback: Function returned b'{"totalCount":null,"records":null}'
+_indy_loop_callback <<<
+fetch_wallet_search_next_records: <<< res: '{"totalCount":null,"records":null}'
+close_wallet_search: >>> wallet_search_handle: 6
+close_wallet_search: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2116cc8>
+do_call: >>> name: indy_close_wallet_search, args: (c_int(6), <CFunctionType object at 0x7ff7f2116cc8>)
+do_call: Function indy_close_wallet_search returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 17, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 17, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+close_wallet_search: <<< res: None
+sign_and_submit_request: >>> pool_handle: 4, wallet_handle: 3, submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', request_json: '{"reqId":1621523686139958128,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"7"},"protocolVersion":2}'
+sign_and_submit_request: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2116e58>
+do_call: >>> name: indy_sign_and_submit_request, args: (c_int(4), c_int(3), c_char_p(140702894782232), c_char_p(140702937057136), <CFunctionType object at 0x7ff7f2116e58>)
+do_call: Function indy_sign_and_submit_request returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[105, 87, 75, 108, 81, 105, 72, 86, 115, 115, 73, 90, 119, 69, 87, 77, 56, 76, 102, 113, 73, 97, 71, 122, 52, 47, 106, 90, 103, 113, 117, 107, 83, 97, 89, 55, 48, 106, 72, 43, 98, 103, 115, 50, 53, 77, 105, 49, 76, 81, 61, 61], [122, 110, 99, 99, 56, 79, 90, 100, 55, 82, 110, 56, 83, 81, 99, 43, 83, 108, 53, 54, 120, 89, 102, 74, 103, 73, 119, 87, 122, 104, 117, 114, 112, 111, 106, 110, 106, 51, 75, 69, 67, 54, 103, 50, 85, 112, 79, 104, 43, 120, 113, 122, 52, 48, 113, 77, 47, 43, 98, 112, 109, 81, 119, 77, 110, 67, 98, 56, 56, 79, 56, 116, 99, 75, 78, 99, 55, 90, 98, 73, 72, 69, 102, 102, 98, 69, 119, 56, 74, 90, 50, 85, 115, 81, 104, 110], "GMC"]
+_indy_callback: >>> command_handle: 18, err , args: (b'{"op":"REPLY","result":{"type":"7","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686139958128,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 18, err , args: (b'{"op":"REPLY","result":{"type":"7","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686139958128,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}',)
+_indy_loop_callback: Function returned b'{"op":"REPLY","result":{"type":"7","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686139958128,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}'
+_indy_loop_callback <<<
+sign_and_submit_request: <<< res: '{"op":"REPLY","result":{"type":"7","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686139958128,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}'
+build_get_txn_author_agreement_request: >>> submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', data: None
+build_get_txn_author_agreement_request: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2119048>
+do_call: >>> name: indy_build_get_txn_author_agreement_request, args: (c_char_p(140702894781448), None, <CFunctionType object at 0x7ff7f2119048>)
+do_call: Function indy_build_get_txn_author_agreement_request returned err: 0
+	src/services/ledger/mod.rs:439 | build_get_txn_author_agreement_request() => Ok("{\"reqId\":1621523686170072896,\"identifier\":\"TDAbSf3Uqebg8N4XvybMbg\",\"operation\":{\"type\":\"6\"},\"protocolVersion\":2}")
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 19, err , args: (b'{"reqId":1621523686170072896,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"6"},"protocolVersion":2}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 19, err , args: (b'{"reqId":1621523686170072896,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"6"},"protocolVersion":2}',)
+_indy_loop_callback: Function returned b'{"reqId":1621523686170072896,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"6"},"protocolVersion":2}'
+_indy_loop_callback <<<
+build_get_txn_author_agreement_request: <<< res: '{"reqId":1621523686170072896,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"6"},"protocolVersion":2}'
+open_wallet_search: >>> wallet_handle: 3, type_: 'taa_accepted', query_json: '{"pool_name": "default"}', options_json: '{"retrieveRecords": true, "retrieveTotalCount": false, "retrieveType": false, "retrieveValue": true, "retrieveTags": true}'
+do_call: >>> name: indy_open_wallet_search, args: (c_int(3), c_char_p(140702937117712), c_char_p(140702937003664), c_char_p(140702938512592), <CFunctionType object at 0x7ff7f21169a8>)
+do_call: Function indy_open_wallet_search returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s6`: WITH tags_encrypted as (select * from tags_encrypted where wallet_id = $5) SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND (i.id in (SELECT item_id FROM tags_encrypted WHERE name = $2 AND value = $3)) AND i.wallet_id = $4
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s5`: SELECT name, value from tags_plaintext where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s6`: SELECT name, value from tags_encrypted where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s6 with parameters: [[107, 82, 83, 53, 48, 52, 77, 97, 51, 104, 111, 54, 120, 115, 85, 78, 118, 74, 90, 105, 82, 80, 108, 56, 75, 114, 77, 86, 65, 89, 115, 81, 65, 116, 76, 109, 48, 113, 50, 85, 121, 80, 108, 108, 86, 68, 52, 48, 85, 55, 56, 76, 118, 81, 61, 61], [59, 78, 218, 243, 129, 94, 168, 233, 72, 111, 71, 200, 78, 7, 242, 104, 78, 145, 181, 61, 195, 15, 152, 13, 87, 178, 176, 199, 76, 207, 197, 99, 114, 84, 250, 136, 0], [62, 6, 39, 43, 11, 118, 170, 142, 81, 1, 26, 214, 211, 208, 47, 23, 128, 222, 243, 246, 121, 75, 136, 72, 63, 157, 104, 122, 50, 88, 241, 136, 6, 107, 208], "GMC", "GMC"]
+_indy_callback: >>> command_handle: 20, err , args: (8,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 20, err , args: (8,)
+_indy_loop_callback: Function returned 8
+_indy_loop_callback <<<
+open_wallet_search: <<< res: 8
+fetch_wallet_search_next_records: >>> wallet_handle: 3, wallet_search_handle: 8, count: 100
+do_call: >>> name: indy_fetch_wallet_search_next_records, args: (c_int(3), c_int(8), c_uint(100), <CFunctionType object at 0x7ff7f2116a70>)
+do_call: Function indy_fetch_wallet_search_next_records returned err: 0
+_indy_callback: >>> command_handle: 21, err , args: (b'{"totalCount":null,"records":null}',)
+do_call: <<< <Future pending>
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 21, err , args: (b'{"totalCount":null,"records":null}',)
+_indy_loop_callback: Function returned b'{"totalCount":null,"records":null}'
+_indy_loop_callback <<<
+fetch_wallet_search_next_records: <<< res: '{"totalCount":null,"records":null}'
+close_wallet_search: >>> wallet_search_handle: 8
+do_call: >>> name: indy_close_wallet_search, args: (c_int(8), <CFunctionType object at 0x7ff7f2116cc8>)
+do_call: Function indy_close_wallet_search returned err: 0
+_indy_callback: >>> command_handle: 22, err , args: ()
+do_call: <<< <Future pending>
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 22, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+close_wallet_search: <<< res: None
+sign_and_submit_request: >>> pool_handle: 4, wallet_handle: 3, submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', request_json: '{"reqId":1621523686170072896,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"6"},"protocolVersion":2}'
+do_call: >>> name: indy_sign_and_submit_request, args: (c_int(4), c_int(3), c_char_p(140702894783240), c_char_p(140702937057136), <CFunctionType object at 0x7ff7f2116e58>)
+do_call: Function indy_sign_and_submit_request returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[105, 87, 75, 108, 81, 105, 72, 86, 115, 115, 73, 90, 119, 69, 87, 77, 56, 76, 102, 113, 73, 97, 71, 122, 52, 47, 106, 90, 103, 113, 117, 107, 83, 97, 89, 55, 48, 106, 72, 43, 98, 103, 115, 50, 53, 77, 105, 49, 76, 81, 61, 61], [122, 110, 99, 99, 56, 79, 90, 100, 55, 82, 110, 56, 83, 81, 99, 43, 83, 108, 53, 54, 120, 89, 102, 74, 103, 73, 119, 87, 122, 104, 117, 114, 112, 111, 106, 110, 106, 51, 75, 69, 67, 54, 103, 50, 85, 112, 79, 104, 43, 120, 113, 122, 52, 48, 113, 77, 47, 43, 98, 112, 109, 81, 119, 77, 110, 67, 98, 56, 56, 79, 56, 116, 99, 75, 78, 99, 55, 90, 98, 73, 72, 69, 102, 102, 98, 69, 119, 56, 74, 90, 50, 85, 115, 81, 104, 110], "GMC"]
+_indy_callback: >>> command_handle: 23, err , args: (b'{"op":"REPLY","result":{"type":"6","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686170072896,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 23, err , args: (b'{"op":"REPLY","result":{"type":"6","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686170072896,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}',)
+_indy_loop_callback: Function returned b'{"op":"REPLY","result":{"type":"6","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686170072896,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}'
+_indy_loop_callback <<<
+sign_and_submit_request: <<< res: '{"op":"REPLY","result":{"type":"6","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686170072896,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","multi_signature":{"signature":"R27NL74ZFLmDN5eSf3BUAzwcF43fRwwM3Ndrug9XBmYUzww7ar5MCCcNTU6HmmcaBM1kWkoAmcazpS1mTBWvxQtt3ziQTkEX74XmtnkGXuCdE35GvxpqJMsecTxRCu66JyKp5NNKxdNewsdCNzzaEVQ8CdrcJ6tvueGFDjT7hfUSsH","participants":["Node3","Node2","Node4"],"value":{"ledger_id":2,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"DfNLmH4DAHTKv63YPFJzuRdeEtVwF5RtVnvKYHd8iLEA","timestamp":1621523478,"txn_root_hash":"GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn"}},"proof_nodes":"wYA="}}}'
+get_my_did_with_meta: >>> wallet_handle: 3, did: 'TDAbSf3Uqebg8N4XvybMbg'
+do_call: >>> name: indy_get_my_did_with_meta, args: (c_int(3), c_char_p(140702894782344), <CFunctionType object at 0x7ff7f493eb38>)
+do_call: Function indy_get_my_did_with_meta returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+_indy_callback: >>> command_handle: 24, err , args: (b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 24, err , args: (b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}',)
+_indy_loop_callback: Function returned b'{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}'
+_indy_loop_callback <<<
+get_my_did_with_meta: <<< res: '{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}'
+list_my_dids_with_meta: >>> wallet_handle: 3
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s7`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s7 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s7`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s7 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s8`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s8 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 25, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 25, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_loop_callback: Function returned b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+list_my_dids_with_meta: >>> wallet_handle: 3
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s8`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s8 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s9`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s9 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s9`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s9 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 26, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 26, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_loop_callback: Function returned b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+build_get_attrib_request: >>> submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', target_did: 'TDAbSf3Uqebg8N4XvybMbg', raw: 'endpoint', xhash: None, enc: None
+build_get_attrib_request: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f21192a0>
+do_call: >>> name: indy_build_get_attrib_request, args: (c_char_p(140702894783128), c_char_p(140702894783464), c_char_p(140702937118240), None, None, <CFunctionType object at 0x7ff7f21192a0>)
+do_call: Function indy_build_get_attrib_request returned err: 0
+do_call: <<< <Future pending>
+	src/services/ledger/mod.rs:137 | build_get_attrib_request() => Ok("{\"reqId\":1621523686206252208,\"identifier\":\"TDAbSf3Uqebg8N4XvybMbg\",\"operation\":{\"type\":\"104\",\"dest\":\"TDAbSf3Uqebg8N4XvybMbg\",\"raw\":\"endpoint\"},\"protocolVersion\":2}")
+_indy_callback: >>> command_handle: 27, err , args: (b'{"reqId":1621523686206252208,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"104","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint"},"protocolVersion":2}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 27, err , args: (b'{"reqId":1621523686206252208,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"104","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint"},"protocolVersion":2}',)
+_indy_loop_callback: Function returned b'{"reqId":1621523686206252208,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"104","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint"},"protocolVersion":2}'
+_indy_loop_callback <<<
+build_get_attrib_request: <<< res: '{"reqId":1621523686206252208,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"104","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint"},"protocolVersion":2}'
+open_wallet_search: >>> wallet_handle: 3, type_: 'taa_accepted', query_json: '{"pool_name": "default"}', options_json: '{"retrieveRecords": true, "retrieveTotalCount": false, "retrieveType": false, "retrieveValue": true, "retrieveTags": true}'
+do_call: >>> name: indy_open_wallet_search, args: (c_int(3), c_char_p(140702937118240), c_char_p(140702937003344), c_char_p(140702938512592), <CFunctionType object at 0x7ff7f21169a8>)
+do_call: Function indy_open_wallet_search returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s10`: WITH tags_encrypted as (select * from tags_encrypted where wallet_id = $5) SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND (i.id in (SELECT item_id FROM tags_encrypted WHERE name = $2 AND value = $3)) AND i.wallet_id = $4
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s2`: SELECT name, value from tags_plaintext where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s3`: SELECT name, value from tags_encrypted where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s10 with parameters: [[107, 82, 83, 53, 48, 52, 77, 97, 51, 104, 111, 54, 120, 115, 85, 78, 118, 74, 90, 105, 82, 80, 108, 56, 75, 114, 77, 86, 65, 89, 115, 81, 65, 116, 76, 109, 48, 113, 50, 85, 121, 80, 108, 108, 86, 68, 52, 48, 85, 55, 56, 76, 118, 81, 61, 61], [59, 78, 218, 243, 129, 94, 168, 233, 72, 111, 71, 200, 78, 7, 242, 104, 78, 145, 181, 61, 195, 15, 152, 13, 87, 178, 176, 199, 76, 207, 197, 99, 114, 84, 250, 136, 0], [62, 6, 39, 43, 11, 118, 170, 142, 81, 1, 26, 214, 211, 208, 47, 23, 128, 222, 243, 246, 121, 75, 136, 72, 63, 157, 104, 122, 50, 88, 241, 136, 6, 107, 208], "GMC", "GMC"]
+_indy_callback: >>> command_handle: 28, err , args: (10,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 28, err , args: (10,)
+_indy_loop_callback: Function returned 10
+_indy_loop_callback <<<
+open_wallet_search: <<< res: 10
+fetch_wallet_search_next_records: >>> wallet_handle: 3, wallet_search_handle: 10, count: 100
+do_call: >>> name: indy_fetch_wallet_search_next_records, args: (c_int(3), c_int(10), c_uint(100), <CFunctionType object at 0x7ff7f2116a70>)
+do_call: Function indy_fetch_wallet_search_next_records returned err: 0
+_indy_callback: >>> command_handle: 29, err , args: (b'{"totalCount":null,"records":null}',)
+do_call: <<< <Future pending>
+_indy_loop_callback: >>> command_handle: 29, err , args: (b'{"totalCount":null,"records":null}',)
+_indy_callback: <<<
+_indy_loop_callback: Function returned b'{"totalCount":null,"records":null}'
+_indy_loop_callback <<<
+fetch_wallet_search_next_records: <<< res: '{"totalCount":null,"records":null}'
+close_wallet_search: >>> wallet_search_handle: 10
+do_call: >>> name: indy_close_wallet_search, args: (c_int(10), <CFunctionType object at 0x7ff7f2116cc8>)
+do_call: Function indy_close_wallet_search returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 30, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 30, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+close_wallet_search: <<< res: None
+sign_and_submit_request: >>> pool_handle: 4, wallet_handle: 3, submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', request_json: '{"reqId":1621523686206252208,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"104","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint"},"protocolVersion":2}'
+do_call: >>> name: indy_sign_and_submit_request, args: (c_int(4), c_int(3), c_char_p(140702894783464), c_char_p(140702894887792), <CFunctionType object at 0x7ff7f2116e58>)
+do_call: Function indy_sign_and_submit_request returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[105, 87, 75, 108, 81, 105, 72, 86, 115, 115, 73, 90, 119, 69, 87, 77, 56, 76, 102, 113, 73, 97, 71, 122, 52, 47, 106, 90, 103, 113, 117, 107, 83, 97, 89, 55, 48, 106, 72, 43, 98, 103, 115, 50, 53, 77, 105, 49, 76, 81, 61, 61], [122, 110, 99, 99, 56, 79, 90, 100, 55, 82, 110, 56, 83, 81, 99, 43, 83, 108, 53, 54, 120, 89, 102, 74, 103, 73, 119, 87, 122, 104, 117, 114, 112, 111, 106, 110, 106, 51, 75, 69, 67, 54, 103, 50, 85, 112, 79, 104, 43, 120, 113, 122, 52, 48, 113, 77, 47, 43, 98, 112, 109, 81, 119, 77, 110, 67, 98, 56, 56, 79, 56, 116, 99, 75, 78, 99, 55, 90, 98, 73, 72, 69, 102, 102, 98, 69, 119, 56, 74, 90, 50, 85, 115, 81, 104, 110], "GMC"]
+_indy_callback: >>> command_handle: 31, err , args: (b'{"op":"REPLY","result":{"dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint","type":"104","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686206252208,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","multi_signature":{"signature":"QsfDNz75jAivFiw13jvGvsXyJ9YsSqHHQR6Ze9czYKwfdSbrs8Px5CQRV6MLPaXEfXBc4uP3FwJ5Mz2fHV7B9rwYMNZRpBKEnjpiGGvEVN8u4oEPaHPcKXstFwUYDc4EnY5upFPN86RkPARYmw5GKyLg2MQdUCHkNmj83ptMUXCjPd","participants":["Node3","Node2","Node4"],"value":{"ledger_id":1,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","timestamp":1621523478,"txn_root_hash":"DJLzEifT7n9DbiCHqQ5KWrWUPFBiZt349popapDfzo5p"}},"proof_nodes":"+QE2+IGgOb3tL9rLCaNhaLueITfpAXOXuPKY3xpts7IFO2f\\/3IK4XvhcuFp7ImlkZW50aWZpZXIiOm51bGwsInJvbGUiOiIwIiwic2VxTm8iOjEsInR4blRpbWUiOm51bGwsInZlcmtleSI6In5Db1JFUjYzRFZZbldadEs4dUF6TmJ4In34saDT0j9uCbFabO0LnyutnB5uDC61QaWLtVTJU4XCa4sWo4CAoJqauj70Qf++s0g43b1zvnQEyQJh2lfNqxFRtmaADvkwgKACG8f0w2NsuDibWYibc1TYySAgUKSeIevHF6wVZdMBL4CAgICAgICgSPFxE7GIAdYVFQHY6GY9m5Fi6UqwOZuEC3Vx+Yrja9GAoDs6GXxRL8inD2b3RY1v\\/ufksDHNqfFKaK2MEIjNIZwagA=="}}}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 31, err , args: (b'{"op":"REPLY","result":{"dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint","type":"104","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686206252208,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","multi_signature":{"signature":"QsfDNz75jAivFiw13jvGvsXyJ9YsSqHHQR6Ze9czYKwfdSbrs8Px5CQRV6MLPaXEfXBc4uP3FwJ5Mz2fHV7B9rwYMNZRpBKEnjpiGGvEVN8u4oEPaHPcKXstFwUYDc4EnY5upFPN86RkPARYmw5GKyLg2MQdUCHkNmj83ptMUXCjPd","participants":["Node3","Node2","Node4"],"value":{"ledger_id":1,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","timestamp":1621523478,"txn_root_hash":"DJLzEifT7n9DbiCHqQ5KWrWUPFBiZt349popapDfzo5p"}},"proof_nodes":"+QE2+IGgOb3tL9rLCaNhaLueITfpAXOXuPKY3xpts7IFO2f\\/3IK4XvhcuFp7ImlkZW50aWZpZXIiOm51bGwsInJvbGUiOiIwIiwic2VxTm8iOjEsInR4blRpbWUiOm51bGwsInZlcmtleSI6In5Db1JFUjYzRFZZbldadEs4dUF6TmJ4In34saDT0j9uCbFabO0LnyutnB5uDC61QaWLtVTJU4XCa4sWo4CAoJqauj70Qf++s0g43b1zvnQEyQJh2lfNqxFRtmaADvkwgKACG8f0w2NsuDibWYibc1TYySAgUKSeIevHF6wVZdMBL4CAgICAgICgSPFxE7GIAdYVFQHY6GY9m5Fi6UqwOZuEC3Vx+Yrja9GAoDs6GXxRL8inD2b3RY1v\\/ufksDHNqfFKaK2MEIjNIZwagA=="}}}',)
+_indy_loop_callback: Function returned b'{"op":"REPLY","result":{"dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint","type":"104","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686206252208,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","multi_signature":{"signature":"QsfDNz75jAivFiw13jvGvsXyJ9YsSqHHQR6Ze9czYKwfdSbrs8Px5CQRV6MLPaXEfXBc4uP3FwJ5Mz2fHV7B9rwYMNZRpBKEnjpiGGvEVN8u4oEPaHPcKXstFwUYDc4EnY5upFPN86RkPARYmw5GKyLg2MQdUCHkNmj83ptMUXCjPd","participants":["Node3","Node2","Node4"],"value":{"ledger_id":1,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","timestamp":1621523478,"txn_root_hash":"DJLzEifT7n9DbiCHqQ5KWrWUPFBiZt349popapDfzo5p"}},"proof_nodes":"+QE2+IGgOb3tL9rLCaNhaLueITfpAXOXuPKY3xpts7IFO2f\\/3IK4XvhcuFp7ImlkZW50aWZpZXIiOm51bGwsInJvbGUiOiIwIiwic2VxTm8iOjEsInR4blRpbWUiOm51bGwsInZlcmtleSI6In5Db1JFUjYzRFZZbldadEs4dUF6TmJ4In34saDT0j9uCbFabO0LnyutnB5uDC61QaWLtVTJU4XCa4sWo4CAoJqauj70Qf++s0g43b1zvnQEyQJh2lfNqxFRtmaADvkwgKACG8f0w2NsuDibWYibc1TYySAgUKSeIevHF6wVZdMBL4CAgICAgICgSPFxE7GIAdYVFQHY6GY9m5Fi6UqwOZuEC3Vx+Yrja9GAoDs6GXxRL8inD2b3RY1v\\/ufksDHNqfFKaK2MEIjNIZwagA=="}}}'
+_indy_loop_callback <<<
+sign_and_submit_request: <<< res: '{"op":"REPLY","result":{"dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"endpoint","type":"104","data":null,"identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686206252208,"seqNo":null,"txnTime":null,"state_proof":{"root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","multi_signature":{"signature":"QsfDNz75jAivFiw13jvGvsXyJ9YsSqHHQR6Ze9czYKwfdSbrs8Px5CQRV6MLPaXEfXBc4uP3FwJ5Mz2fHV7B9rwYMNZRpBKEnjpiGGvEVN8u4oEPaHPcKXstFwUYDc4EnY5upFPN86RkPARYmw5GKyLg2MQdUCHkNmj83ptMUXCjPd","participants":["Node3","Node2","Node4"],"value":{"ledger_id":1,"pool_state_root_hash":"8xwEHCkVcEA9qfBJaESpWKvtHVxUkvzJctAHfBiVhAAJ","state_root_hash":"GWEizEWQdGH5QFdxRpoQGvPR42zSUEJoFkQKGBHiNDbM","timestamp":1621523478,"txn_root_hash":"DJLzEifT7n9DbiCHqQ5KWrWUPFBiZt349popapDfzo5p"}},"proof_nodes":"+QE2+IGgOb3tL9rLCaNhaLueITfpAXOXuPKY3xpts7IFO2f\\/3IK4XvhcuFp7ImlkZW50aWZpZXIiOm51bGwsInJvbGUiOiIwIiwic2VxTm8iOjEsInR4blRpbWUiOm51bGwsInZlcmtleSI6In5Db1JFUjYzRFZZbldadEs4dUF6TmJ4In34saDT0j9uCbFabO0LnyutnB5uDC61QaWLtVTJU4XCa4sWo4CAoJqauj70Qf++s0g43b1zvnQEyQJh2lfNqxFRtmaADvkwgKACG8f0w2NsuDibWYibc1TYySAgUKSeIevHF6wVZdMBL4CAgICAgICgSPFxE7GIAdYVFQHY6GY9m5Fi6UqwOZuEC3Vx+Yrja9GAoDs6GXxRL8inD2b3RY1v\\/ufksDHNqfFKaK2MEIjNIZwagA=="}}}'
+build_attrib_request: >>> submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', target_did: 'TDAbSf3Uqebg8N4XvybMbg', hash: None, raw: '{"endpoint": {"endpoint": "https://b5c4cd612c36.ngrok.io"}}', enc: None
+build_attrib_request: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f2119368>
+do_call: >>> name: indy_build_attrib_request, args: (c_char_p(140702894783576), c_char_p(140702894783352), None, c_char_p(140702937096016), None, <CFunctionType object at 0x7ff7f2119368>)
+do_call: Function indy_build_attrib_request returned err: 0
+	src/services/ledger/mod.rs:128 | build_attrib_request() => Ok("{\"reqId\":1621523686232104385,\"identifier\":\"TDAbSf3Uqebg8N4XvybMbg\",\"operation\":{\"type\":\"100\",\"dest\":\"TDAbSf3Uqebg8N4XvybMbg\",\"raw\":\"{\\\"endpoint\\\":{\\\"endpoint\\\":\\\"https://b5c4cd612c36.ngrok.io\\\"}}\"},\"protocolVersion\":2}")
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 32, err , args: (b'{"reqId":1621523686232104385,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"100","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"{\\"endpoint\\":{\\"endpoint\\":\\"https://b5c4cd612c36.ngrok.io\\"}}"},"protocolVersion":2}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 32, err , args: (b'{"reqId":1621523686232104385,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"100","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"{\\"endpoint\\":{\\"endpoint\\":\\"https://b5c4cd612c36.ngrok.io\\"}}"},"protocolVersion":2}',)
+_indy_loop_callback: Function returned b'{"reqId":1621523686232104385,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"100","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"{\\"endpoint\\":{\\"endpoint\\":\\"https://b5c4cd612c36.ngrok.io\\"}}"},"protocolVersion":2}'
+_indy_loop_callback <<<
+build_attrib_request: <<< res: '{"reqId":1621523686232104385,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"100","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"{\\"endpoint\\":{\\"endpoint\\":\\"https://b5c4cd612c36.ngrok.io\\"}}"},"protocolVersion":2}'
+list_my_dids_with_meta: >>> wallet_handle: 3
+do_call: >>> name: indy_list_my_dids_with_meta, args: (c_int(3), <CFunctionType object at 0x7ff7f493e818>)
+do_call: Function indy_list_my_dids_with_meta returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s11`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s11 with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s4`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s4 with parameters: [[73, 71, 43, 102, 84, 115, 119, 104, 73, 109, 101, 79, 43, 116, 53, 105, 113, 98, 89, 72, 67, 82, 79, 105, 115, 119, 113, 103, 101, 99, 114, 66, 89, 99, 84, 77, 73, 51, 77, 81, 86, 51, 112, 102, 113, 112, 110, 49, 117, 72, 70, 111, 89, 71, 100, 50, 82, 69, 110, 43], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT count(*) FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s12`: SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND i.wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s12 with parameters: [[48, 86, 43, 85, 69, 120, 117, 83, 110, 51, 101, 104, 56, 115, 75, 87, 106, 79, 81, 104, 116, 85, 114, 120, 43, 109, 117, 111, 119, 54, 108, 122, 84, 99, 89, 85, 80, 80, 81, 122, 49, 69, 48, 69, 89, 121, 52, 82, 112, 117, 114, 56, 55, 71, 103, 57, 119, 56, 99, 107, 43, 65, 61, 61], "GMC"]
+_indy_callback: >>> command_handle: 33, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 33, err , args: (b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]',)
+_indy_loop_callback: Function returned b'[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+_indy_loop_callback <<<
+list_my_dids_with_meta: <<< res: '[{"did":"TDAbSf3Uqebg8N4XvybMbg","verkey":"FHYRgHt1Z7pZBEY5yMaTHoeLMTvbQ9R6qdxhJu69xEw2","tempVerkey":null,"metadata":"{\\"public\\": true, \\"posted\\": true}"}]'
+open_wallet_search: >>> wallet_handle: 3, type_: 'taa_accepted', query_json: '{"pool_name": "default"}', options_json: '{"retrieveRecords": true, "retrieveTotalCount": false, "retrieveType": false, "retrieveValue": true, "retrieveTags": true}'
+do_call: >>> name: indy_open_wallet_search, args: (c_int(3), c_char_p(140702937118192), c_char_p(140702937004048), c_char_p(140702938512592), <CFunctionType object at 0x7ff7f21169a8>)
+do_call: Function indy_open_wallet_search returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s5`: WITH tags_encrypted as (select * from tags_encrypted where wallet_id = $5) SELECT i.id, i.name, i.value, i.key, i.type FROM items as i WHERE i.type = $1 AND (i.id in (SELECT item_id FROM tags_encrypted WHERE name = $2 AND value = $3)) AND i.wallet_id = $4
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s10`: SELECT name, value from tags_plaintext where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name `s11`: SELECT name, value from tags_encrypted where item_id = $1 and wallet_id = $2
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement s5 with parameters: [[107, 82, 83, 53, 48, 52, 77, 97, 51, 104, 111, 54, 120, 115, 85, 78, 118, 74, 90, 105, 82, 80, 108, 56, 75, 114, 77, 86, 65, 89, 115, 81, 65, 116, 76, 109, 48, 113, 50, 85, 121, 80, 108, 108, 86, 68, 52, 48, 85, 55, 56, 76, 118, 81, 61, 61], [59, 78, 218, 243, 129, 94, 168, 233, 72, 111, 71, 200, 78, 7, 242, 104, 78, 145, 181, 61, 195, 15, 152, 13, 87, 178, 176, 199, 76, 207, 197, 99, 114, 84, 250, 136, 0], [62, 6, 39, 43, 11, 118, 170, 142, 81, 1, 26, 214, 211, 208, 47, 23, 128, 222, 243, 246, 121, 75, 136, 72, 63, 157, 104, 122, 50, 88, 241, 136, 6, 107, 208], "GMC", "GMC"]
+_indy_callback: >>> command_handle: 34, err , args: (12,)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 34, err , args: (12,)
+_indy_loop_callback: Function returned 12
+_indy_loop_callback <<<
+open_wallet_search: <<< res: 12
+fetch_wallet_search_next_records: >>> wallet_handle: 3, wallet_search_handle: 12, count: 100
+do_call: >>> name: indy_fetch_wallet_search_next_records, args: (c_int(3), c_int(12), c_uint(100), <CFunctionType object at 0x7ff7f2116a70>)
+do_call: Function indy_fetch_wallet_search_next_records returned err: 0
+_indy_callback: >>> command_handle: 35, err , args: (b'{"totalCount":null,"records":null}',)
+do_call: <<< <Future pending>
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 35, err , args: (b'{"totalCount":null,"records":null}',)
+_indy_loop_callback: Function returned b'{"totalCount":null,"records":null}'
+_indy_loop_callback <<<
+fetch_wallet_search_next_records: <<< res: '{"totalCount":null,"records":null}'
+close_wallet_search: >>> wallet_search_handle: 12
+do_call: >>> name: indy_close_wallet_search, args: (c_int(12), <CFunctionType object at 0x7ff7f2116cc8>)
+do_call: Function indy_close_wallet_search returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 36, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 36, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+close_wallet_search: <<< res: None
+sign_and_submit_request: >>> pool_handle: 4, wallet_handle: 3, submitter_did: 'TDAbSf3Uqebg8N4XvybMbg', request_json: '{"reqId":1621523686232104385,"identifier":"TDAbSf3Uqebg8N4XvybMbg","operation":{"type":"100","dest":"TDAbSf3Uqebg8N4XvybMbg","raw":"{\\"endpoint\\":{\\"endpoint\\":\\"https://b5c4cd612c36.ngrok.io\\"}}"},"protocolVersion":2}'
+do_call: >>> name: indy_sign_and_submit_request, args: (c_int(4), c_int(3), c_char_p(140702894782344), c_char_p(140702938182736), <CFunctionType object at 0x7ff7f2116e58>)
+do_call: Function indy_sign_and_submit_request returned err: 0
+do_call: <<< <Future pending>
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[117, 52, 66, 98, 102, 87, 111, 65, 118, 78, 88, 78, 109, 76, 57, 47, 108, 111, 118, 83, 117, 83, 82, 69, 100, 113, 73, 89, 80, 66, 115, 55, 85, 47, 99, 117, 56, 101, 107, 101, 105, 107, 103, 106, 108, 116, 66, 81, 49, 119, 61, 61], [98, 104, 78, 100, 110, 98, 86, 114, 89, 89, 107, 87, 43, 116, 118, 49, 75, 51, 81, 118, 113, 85, 121, 71, 102, 73, 121, 75, 74, 57, 90, 87, 86, 104, 113, 83, 111, 86, 112, 52, 86, 109, 68, 102, 87, 110, 86, 98, 69, 73, 88, 83, 56, 97, 68, 112, 85, 118, 85, 103, 105, 52, 84, 47, 97, 47, 81, 61], "GMC"]
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:901 | executing query: 
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:489 | preparing query with name ``: SELECT id, value, key FROM items where type = $1 AND name = $2 AND wallet_id = $3
+	/home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/postgres-0.15.2/src/lib.rs:608 | executing statement  with parameters: [[105, 87, 75, 108, 81, 105, 72, 86, 115, 115, 73, 90, 119, 69, 87, 77, 56, 76, 102, 113, 73, 97, 71, 122, 52, 47, 106, 90, 103, 113, 117, 107, 83, 97, 89, 55, 48, 106, 72, 43, 98, 103, 115, 50, 53, 77, 105, 49, 76, 81, 61, 61], [122, 110, 99, 99, 56, 79, 90, 100, 55, 82, 110, 56, 83, 81, 99, 43, 83, 108, 53, 54, 120, 89, 102, 74, 103, 73, 119, 87, 122, 104, 117, 114, 112, 111, 106, 110, 106, 51, 75, 69, 67, 54, 103, 50, 85, 112, 79, 104, 43, 120, 113, 122, 52, 48, 113, 77, 47, 43, 98, 112, 109, 81, 119, 77, 110, 67, 98, 56, 56, 79, 56, 116, 99, 75, 78, 99, 55, 90, 98, 73, 72, 69, 102, 102, 98, 69, 119, 56, 74, 90, 50, 85, 115, 81, 104, 110], "GMC"]
+_indy_callback: >>> command_handle: 37, err , args: (b'{"op":"REQNACK","identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686232104385,"reason":"client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found"}',)
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 37, err , args: (b'{"op":"REQNACK","identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686232104385,"reason":"client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found"}',)
+_indy_loop_callback: Function returned b'{"op":"REQNACK","identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686232104385,"reason":"client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found"}'
+_indy_loop_callback <<<
+sign_and_submit_request: <<< res: '{"op":"REQNACK","identifier":"TDAbSf3Uqebg8N4XvybMbg","reqId":1621523686232104385,"reason":"client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found"}'
+Exception during startup:
+Traceback (most recent call last):
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/config/ledger.py", line 89, in ledger_config
+    await wallet.set_did_endpoint(public_did, endpoint, ledger)
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/wallet/indy.py", line 334, in set_did_endpoint
+    await ledger.update_endpoint_for_did(did, endpoint, endpoint_type)
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/ledger/indy.py", line 865, in update_endpoint_for_did
+    await self._submit(request_json, True, True)
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/ledger/indy.py", line 345, in _submit
+    f"Ledger rejected transaction request: {request_result['reason']}"
+aries_cloudagent.ledger.error.LedgerTransactionError: Ledger rejected transaction request: client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/commands/start.py", line 72, in init
+    await startup
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/commands/start.py", line 28, in start_app
+    await conductor.setup()
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/core/conductor.py", line 96, in setup
+    self.root_profile, self.setup_public_did and self.setup_public_did.did
+  File "/home/indy/.pyenv/versions/3.6.13/lib/python3.6/site-packages/aries_cloudagent/config/ledger.py", line 91, in ledger_config
+    raise ConfigError(x_ledger.message) from x_ledger  # e.g., read-only
+aries_cloudagent.config.base.ConfigError: Ledger rejected transaction request: client request invalid: could not authenticate, verkey for TDAbSf3Uqebg8N4XvybMbg cannot be found
+close_wallet: >>> handle: 3
+close_wallet: Creating callback
+create_cb: >>> cb_type: <class 'ctypes.CFUNCTYPE.<locals>.CFunctionType'>
+create_cb: <<< res: <CFunctionType object at 0x7ff7f21195c0>
+do_call: >>> name: indy_close_wallet, args: (c_int(3), <CFunctionType object at 0x7ff7f21195c0>)
+do_call: Function indy_close_wallet returned err: 0
+do_call: <<< <Future pending>
+_indy_callback: >>> command_handle: 38, err , args: ()
+_indy_callback: <<<
+_indy_loop_callback: >>> command_handle: 38, err , args: ()
+_indy_loop_callback: Function returned None
+_indy_loop_callback <<<
+close_wallet: <<<
