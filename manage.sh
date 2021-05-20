@@ -64,11 +64,12 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic
-                    alice-wallet-db ngrok-alice alice-agent alice-business-logic
+DEFAULT_CONTAINERS="general-medical-council-wallet-db ngrok-general-medical-council general-medical-council-agent general-medical-council-business-logic
+                    edinburgh-medical-school-wallet-db ngrok-edinburgh-medical-school edinburgh-medical-school-agent edinburgh-medical-school-business-logic
+                    medic-wallet-db ngrok-medic medic-agent medic-business-logic
                     tails-server"
 
-# DEFAULT_CONTAINERS="bob-agent alice-agent"
+# DEFAULT_CONTAINERS="general-medical-council-agent edinburgh-medical-school-agent"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------

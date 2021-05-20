@@ -16,6 +16,8 @@ RUN chmod +x ./startup.sh
 COPY scripts/ngrok-wait.sh wait.sh
 RUN chmod +x ./wait.sh
 
+ADD resources/von-local-genesis-txns genesis-txns
+
 USER $user
 
 CMD ./wait.sh ./startup.sh
