@@ -2,6 +2,8 @@
 
 ## A Jupyter Notebook Based Playground for Education and Experimentation with Hyperledger Aries
 
+![Playground Architecture](./system-architecture.png)
+
 ## Requirements
 
 This project is written in Python and is displayed in jupyter notebooks.
@@ -32,12 +34,23 @@ Then run:
 
 This spins up all docker containers defined in the `docker-compose.yml` file and named in the DEFAULT_CONTAINERS variable defined in the `manage.sh` shell script.
 
+The urls for the jupyter notebook server for each agent can be retrieved by running `./scripts/get_URLS.sh` in a terminal from the root of this project.
+
 To stop the playground either:
 
-`./manage.sh stop` - this terminates the containers but persists the volumes in the postgres-db
+`./manage.sh stop` - this terminates the containers but persists the volumes. Specifically the agent wallet storage held in postgres-db's
 
 `./manage.sh down` - terminate containers and delete all volumes
 
+## Writing Business Logic
+
+The aim of this respository is to simplify the process by which you can spin up a set of actors specific to a domain and start to experiment with relevant information exchanges using the Hyperledger verifiable information exchange platform.
+
+All business logic is written is python through jupyter notebooks. Alongside this repository we have developed a pip installable package the [Aries Cloud Controller](https://github.com/didx-xyz/aries-cloudcontroller-python), which provides an easy to use interface to interact with the Swagger API exposed by ACA-Py agents as well as receive and handle webhook events they post.
+
+To streamline the process of writing business logic further, each business-logic docker service has the `recipes` folder mounted such that it is accessible through the jupyter interface. In here there are a set of templates for common protocols you might want your agents to engage in. We suggest you copy these templates into the root of the notebook server and customise from there.
+
+If you wish to learn more about applying SSI, the Hyperledger Stack and the Aries Cloud Controller within this setting a set of tutorials have been developed within a similar notebook-playground environment in the [OpenMined PyDentity](https://github.com/OpenMined/PyDentity) repo. This code is a generalisation of a pattern we repeated regularly while building this code.
 
 ## Configuring the Playground
 
@@ -46,11 +59,14 @@ The playground is designed to make it easy for you to add new actors and start w
 To add an actor you need to make three changes:
 
 * Create a folder under `playground` for that actor and make sure it has a .env file under that folder. You can copy the template `actor` folder and use the `dummy.env` file to get started but will need to edit the file.
-* Define the actor services in the `docker-compose.yml`. More detailed instructions included in the comments on that file including commented out set of services for the actor `actor` that you can change.
+* Define the actor services in the `docker-compose.yml`. More detailed instructions included in the comments in that file, including commented out set of services for the actor `actor` that you can copy and use as a template to get started. You will need to edit these.
 * Add the new services to the DEFAULT_CONTAINERS variable in the `manage.sh` script
 
 Feel free to customise Alice and Bob aswell. It makes sense to name your actors something meaningful to the usecase you are trying to model.
 
+## ACA-Py Agent Configuration
+
+Each agent instance has it's own environment file e.g. `alice/.alice-example.env`. These define default ACA-PY environment variables, which are best understood by reading through the code that parses them. This can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/main/aries_cloudagent/config/argparse.py).
 
 ## Using Different Indy Networks
 
@@ -61,3 +77,4 @@ The master branch currently is set to use the Sovrin StagingNet.
 It is also possible to use the BC Gov's Test Network VON - http://greenlight.bcovrin.vonx.io/genesis
 
 Or a local ledger can be spun up either within the docker-compose.yml or separately by cloning the [VON codebase](https://github.com/bcgov/von-network)
+
