@@ -21,38 +21,38 @@ services:
   # wallet-db
   # a postgres database where agent data will be persisted unless you run ./manage down
   # ./manage stop with stop the containers but persist the database volumes
-  bob-wallet-db:
+  hlgf-wallet-db:
     image: postgres:11
-    container_name: bob-wallet-db
+    container_name: hlgf-wallet-db
     command: postgres -c listen_addresses='*'
     # env file defines
     env_file:
-      - playground/bob/.env
+      - playground/hlgf/.env
     # This creates the data base tables if not present. See resources/init.sql #
     volumes:
       - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - bob-domain
+      - hlgf-domain
     tty: true
   #### ngrok
   # Use if wish to expose agent to public. E.g. so mobile wallets can access #
-  ngrok-bob:
+  ngrok-hlgf:
     image: wernight/ngrok
     env_file:
-      - playground/bob/.env
-    ## You must make sure this points to your agent service. e.g. bob-agent:HTTP_PORT
-    command: ngrok http bob-agent:3020 --log stdout
+      - playground/hlgf/.env
+    ## You must make sure this points to your agent service. e.g. hlgf-agent:HTTP_PORT
+    command: ngrok http hlgf-agent:3020 --log stdout
     networks:
-      - bob-domain
+      - hlgf-domain
   ### agent
-  # This is bob's ACA-Py instance
+  # This is hlgf's ACA-Py instance
   # See dockerfiles/Dockerfile.agent
-  bob-agent:
+  hlgf-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent
     env_file:
-      - playground/bob/.env
+      - playground/hlgf/.env
     ## These map from ports defined in the .env file to unique ports on your machine
     ## YOUR_MACHINE:DOCKER_SERVICE
     ports:
@@ -61,26 +61,26 @@ services:
       # ADMIN_PORT
       - 4021:3021
     depends_on:
-      - bob-wallet-db
+      - hlgf-wallet-db
     networks:
-      - bob-domain
+      - hlgf-domain
   ### business-logic
   # This is where you will create notebooks to interact with your agent
   # This uses the aries-cloudcontroller pip package.
   # See dockerfiles/Dockerfile.controller
   # All business logic share a common set of code recipes to get you started
-  bob-business-logic:
+  hlgf-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/bob/.env
+      - playground/hlgf/.env
     depends_on:
-      - bob-agent
+      - hlgf-agent
     networks:
-      - bob-domain
+      - hlgf-domain
     volumes:
-      - ./playground/bob/notebooks:/workspace
+      - ./playground/hlgf/notebooks:/workspace
       - ./recipes:/workspace/recipes
     ports:
       # Jupyter Notebook port - always map from 8888 to any available port
@@ -89,49 +89,49 @@ services:
       - 4010:3010
   #########################################################################
   #### Alice Services
-  alice-wallet-db:
+  demo-participant-wallet-db:
     image: postgres:11
-    container_name: alice-wallet-db
+    container_name: demo-participant-wallet-db
     command: postgres -c listen_addresses='*'
     env_file:
-      - playground/alice/.env
+      - playground/demo-participant/.env
     volumes:
       - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - alice-domain
+      - demo-participant-domain
     tty: true
-  ngrok-alice:
+  ngrok-demo-participant:
     image: wernight/ngrok
     env_file:
-      - playground/alice/.env
-    command: ngrok http alice-agent:3020 --log stdout
+      - playground/demo-participant/.env
+    command: ngrok http demo-participant-agent:3020 --log stdout
     networks:
-      - alice-domain
-  alice-agent:
+      - demo-participant-domain
+  demo-participant-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent
     env_file:
-      - playground/alice/.env
+      - playground/demo-participant/.env
     ports:
       - 3020:3020
       - 3021:3021
     depends_on:
-      - alice-wallet-db
+      - demo-participant-wallet-db
     networks:
-      - alice-domain
-  alice-business-logic:
+      - demo-participant-domain
+  demo-participant-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/alice/.env
+      - playground/demo-participant/.env
     depends_on:
-      - alice-agent
+      - demo-participant-agent
     networks:
-      - alice-domain
+      - demo-participant-domain
     volumes:
-      - ./playground/alice/notebooks:/workspace
+      - ./playground/demo-participant/notebooks:/workspace
       - ./recipes:/workspace/recipes
     ports:
       - "8888:8888"
@@ -190,15 +190,15 @@ services:
 # Note - for revocation to work you will have to make additional changes to the env files
 #  tails-server:
 #    env_file:
-#      - playground/alice/.env
+#      - playground/demo-participant/.env
 #    build:
 #      context: https://github.com/bcgov/indy-tails-server.git
 #      dockerfile: docker/Dockerfile.tails-server
 #    ports:
 #      - 6543:6543
 #    networks:
-#      - alice-domain
-#      - bob-domain
+#      - demo-participant-domain
+#      - hlgf-domain
 #    command: >
 #      tails-server
 #        --host 0.0.0.0
@@ -206,5 +206,5 @@ services:
 #        --storage-path /tmp/tails-files
 #        --log-level INFO
 networks:
-  alice-domain:
-  bob-domain:
+  demo-participant-domain:
+  hlgf-domain:
