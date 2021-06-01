@@ -47,8 +47,7 @@ usage() {
 
             Examples:
             $0 start
-            $0 start faber-agent
-
+            
       logs - Display the logs from the docker compose run (ctrl-c to exit).
 
       stop - Stops the services.  This is a non-destructive process.  The volumes and containers
@@ -66,7 +65,9 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 DEFAULT_CONTAINERS="general-medical-council-wallet-db ngrok-general-medical-council general-medical-council-agent general-medical-council-business-logic
                     edinburgh-medical-school-wallet-db ngrok-edinburgh-medical-school edinburgh-medical-school-agent edinburgh-medical-school-business-logic
-                    medic-wallet-db ngrok-medic medic-agent medic-business-logic
+                    rie-wallet-db ngrok-rie rie-agent rie-business-logic
+                    ngrok-healthcare-professional healthcare-professional-agent healthcare-professional-business-logic
+                    scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic
                     tails-server"
 
 # DEFAULT_CONTAINERS="general-medical-council-agent edinburgh-medical-school-agent"
