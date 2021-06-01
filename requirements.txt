@@ -1,2 +1,3 @@
 termcolor
+qrcode
 aries_cloudcontroller>=0.2.6

@@ -99,6 +99,7 @@ services:
       - playground/edinburgh-medical-school/.env
     volumes:
       - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /home/will/postgres/medical-school:/var/lib/postgresql/data
     networks:
       - edinburgh-medical-school-domain
     tty: true
@@ -140,58 +141,160 @@ services:
     ports:
       - "8888:8888"
       - 3010:3010
-  medic-wallet-db:
+  healthcare-professional-wallet-db:
     image: postgres:11
-    container_name: medic-wallet-db
+    container_name: healthcare-professional-wallet-db
     command: postgres -c listen_addresses='*'
     # env file defines
     env_file:
-      - playground/medic/.env
+      - playground/healthcare-professional/.env
     volumes:
       - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - medic-domain
+      - healthcare-professional-domain
     tty: true
-  ngrok-medic:
+  ngrok-healthcare-professional:
     image: wernight/ngrok
-    command: ngrok http medic-agent:3020 --log stdout
+    command: ngrok http healthcare-professional-agent:3020 --log stdout
     networks:
-      - medic-domain
-  medic-agent:
+      - healthcare-professional-domain
+  healthcare-professional-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent
     env_file:
-      - playground/medic/.env
+      - playground/healthcare-professional/.env
     ports:
       # HTTP_PORT
       - 6020:3020
       # ADMIN_PORT
       - 6021:3021
     depends_on:
-      - medic-wallet-db
+      - healthcare-professional-wallet-db
     networks:
-      - medic-domain
+      - healthcare-professional-domain
     volumes:
-      - ./playground/medic/logs:/home/indy/logs
+      - ./playground/healthcare-professional/logs:/home/indy/logs
 
-  medic-business-logic:
+  healthcare-professional-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/medic/.env
+      - playground/healthcare-professional/.env
     depends_on:
-      - medic-agent
+      - healthcare-professional-agent
     networks:
-      - medic-domain
+      - healthcare-professional-domain
     volumes:
-      - ./playground/medic/notebooks:/workspace
+      - ./playground/healthcare-professional/notebooks:/workspace
       - ./recipes:/workspace/recipes
     ports:
       - 8890:8888
       # WEBHOOK_PORT
       - 6010:3010
+  rie-wallet-db:
+    image: postgres:11
+    container_name: rie-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rie-domain
+    tty: true
+  ngrok-rie:
+    image: wernight/ngrok
+    command: ngrok http rie-agent:3020 --log stdout
+    networks:
+      - rie-domain
+  rie-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    ports:
+      # HTTP_PORT
+      - 9020:3020
+      # ADMIN_PORT
+      - 9021:3021
+    depends_on:
+      - rie-wallet-db
+    networks:
+      - rie-domain
+    volumes:
+      - ./playground/royal-infirmary-edinburgh/logs:/home/indy/logs
+  rie-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    depends_on:
+      - rie-agent
+    networks:
+      - rie-domain
+    volumes:
+      - ./playground/royal-infirmary-edinburgh/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8893:8888
+      # WEBHOOK_PORT
+      - 9010:3010
+  scottish-deanery-wallet-db:
+    image: postgres:11
+    container_name: scottish-deanery-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/scottish-deanery/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - scottish-deanery-domain
+    tty: true
+  ngrok-scottish-deanery:
+    image: wernight/ngrok
+    command: ngrok http scottish-deanery-agent:3020 --log stdout
+    networks:
+      - scottish-deanery-domain
+  scottish-deanery-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent
+    env_file:
+      - playground/scottish-deanery/.env
+    ports:
+      # HTTP_PORT
+      - 1020:3020
+      # ADMIN_PORT
+      - 1021:3021
+    depends_on:
+      - scottish-deanery-wallet-db
+    networks:
+      - scottish-deanery-domain
+    volumes:
+      - ./playground/scottish-deanery/logs:/home/indy/logs
+  scottish-deanery-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/scottish-deanery/.env
+    depends_on:
+      - scottish-deanery-agent
+    networks:
+      - scottish-deanery-domain
+    volumes:
+      - ./playground/scottish-deanery/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8895:8888
+      # WEBHOOK_PORT
+      - 1010:3010
 #    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
 #      actor-wallet-db:
 #        image: postgres:11
@@ -253,14 +356,19 @@ services:
     networks:
       - edinburgh-medical-school-domain
       - general-medical-council-domain
-      - medic-domain
+      - healthcare-professional-domain
+      - scottish-deanery-domain
+      - rie-domain
     command: >
       tails-server
         --host 0.0.0.0
         --port 6543
         --storage-path /tmp/tails-files
         --log-level INFO
+
 networks:
   edinburgh-medical-school-domain:
   general-medical-council-domain:
-  medic-domain:
+  healthcare-professional-domain:
+  rie-domain:
+  scottish-deanery-domain:

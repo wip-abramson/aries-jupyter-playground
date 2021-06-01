@@ -2,6 +2,7 @@
 
 .env
 
+tmp
 .code
 dist
 *.egg-info
@@ -10,3 +11,5 @@ build
 __pycache__/
 
 .vscode/
+
+*/logs/*
