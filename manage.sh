@@ -64,8 +64,8 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="demo-participant-wallet-db ngrok-demo-participant demo-participant-agent demo-participant-business-logic"
-                    # hlgf-wallet-db ngrok-hlgf hlgf-agent hlgf-business-logic
+DEFAULT_CONTAINERS="demo-participant-wallet-db ngrok-demo-participant demo-participant-agent demo-participant-business-logic
+                    hlgf-wallet-db ngrok-hlgf hlgf-agent hlgf-business-logic"
                     # tails-server"
 
 # DEFAULT_CONTAINERS="hlgf-agent demo-participant-agent"
