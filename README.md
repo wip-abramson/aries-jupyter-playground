@@ -2,6 +2,11 @@
 
 ## A Jupyter Notebook Based Playground for Education and Experimentation with Hyperledger Aries
 
+Design, describe and implement actors and interactions involving the verifiable exchange of information relevant to a specific context. Learn and evaluate what is technically possible using these technologies, validate them for your use case.
+
+This project uses Docker and docker-compose to support and simplify the arbitrary configuration of actors within a SSI ecosystem. As an learner, experimenter or explorer using this playground you get to focus on writing business logic in python through a Jupyter notebook interface that uses the aries-cloudcontroller to interface with the actors respective ACA-Py agent. Either by sending API requests to their exposed Swagger-API or receiving events from this agent posted to a webhook server that you can run within the notebook.
+
+
 ![Playground Architecture](./system-architecture.png)
 
 ## Requirements
