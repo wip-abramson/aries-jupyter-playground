@@ -83,3 +83,15 @@ It is also possible to use the BC Gov's Test Network VON - http://greenlight.bco
 
 Or a local ledger can be spun up either within the docker-compose.yml or separately by cloning the [VON codebase](https://github.com/bcgov/von-network)
 
+## Moving Your Ideas Out of The Playground
+
+At some point you are likely to want to make your ideas more "real". Maybe your use case needs a frontend, or wants to be publicly accessible and automatically responsive to agents on the public internet.
+
+There are two repositories that might help you take that next step, based on experiments we have been doing ourselves.
+
+* Issuer Service: https://github.com/wip-abramson/aries-issuer-service 
+    * This codebase lets you run an agent and associated server so that you can write logic for how the agent should respond to certain events. For example a connection becoming active might be challenged to present a specific set of attributes from a certain schema. Or it might automatically trigger the issuance of a credential. I have found this useful to get credentials out into the hands of holders so they can use them elsewhere in your system.
+* Aries Full Stack React Starter: https://github.com/wip-abramson/aries-acapy-fullstack-starter
+    * Want to build a full stack application with SSI capabilities. This might help you get started.
+    
+One of the great things I have found with this playground is you can model the entire ecosystem you are focused on, test assumptions and validate usecases. Then you can focus on a single actor and implement a POC for a more realistic version of their application/interface. 
