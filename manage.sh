@@ -66,7 +66,10 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic
                     alice-wallet-db ngrok-alice alice-agent alice-business-logic"
-                    # tails-server"
+                    # tails-server "
+
+PRODUCTION_CONTAINERS="bob-wallet-db bob-agent bob-business-logic
+                       alice-wallet-db alice-agent alice-business-logic"
 
 # DEFAULT_CONTAINERS="bob-agent alice-agent"
 # -----------------------------------------------------------------------------------------------------------------

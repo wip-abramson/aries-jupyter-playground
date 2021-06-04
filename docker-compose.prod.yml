@@ -1,0 +1,186 @@
+######################################################################################
+#############   Aries ACA-Py ACC-Py Jupyter Playground Configuration   ###############
+######################################################################################
+############ This removes ngrok services
+############ And uses a Dockerfile.agent.prod
+############ This changes the startup script used see startup-prod.sh
+############ You must define ACAPY_ENDPOINT in the .env file
+############ This should be http://<somepublicip>:<exposed http port>
+############ Where exposed http port is the HTTP PORT mapped to the machine
+############ E.g. 4020:3020 would mean port is 4020
+############ This port must be publically accessible for HTTP requests
+############ You could of course turn this into a domain name instead
+######################################################################################
+version: "3"
+services:
+  ##### Bob Services #####
+  # wallet-db
+  # a postgres database where agent data will be persisted unless you run ./manage down
+  # ./manage stop with stop the containers but persist the database volumes
+  bob-wallet-db:
+    image: postgres:11
+    container_name: bob-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/bob/.env
+    # This creates the data base tables if not present. See resources/init.sql #
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bob-domain
+    tty: true
+  ### agent
+  # This is bob's ACA-Py instance
+  # See dockerfiles/Dockerfile.agent
+  bob-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/bob/.env
+    ## These map from ports defined in the .env file to unique ports on your machine
+    ## YOUR_MACHINE:DOCKER_SERVICE
+    ports:
+      # HTTP_PORT
+      - 4020:3020
+      # ADMIN_PORT
+      - 4021:3021
+    depends_on:
+      - bob-wallet-db
+    networks:
+      - bob-domain
+  ### business-logic
+  # This is where you will create notebooks to interact with your agent
+  # This uses the aries-cloudcontroller pip package.
+  # See dockerfiles/Dockerfile.controller
+  # All business logic share a common set of code recipes to get you started
+  bob-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/bob/.env
+    depends_on:
+      - bob-agent
+    networks:
+      - bob-domain
+    volumes:
+      - ./playground/bob/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+      - ./libs:/workspace/libs
+    ports:
+      # Jupyter Notebook port - always map from 8888 to any available port
+      - 8889:8888
+      # WEBHOOK_PORT
+      - 4010:3010
+  #########################################################################
+  #### Alice Services
+  alice-wallet-db:
+    image: postgres:11
+    container_name: alice-wallet-db
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - playground/alice/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - alice-domain
+    tty: true
+  alice-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/alice/.env
+    ports:
+      - 3020:3020
+      - 3021:3021
+    depends_on:
+      - alice-wallet-db
+    networks:
+      - alice-domain
+  alice-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/alice/.env
+    depends_on:
+      - alice-agent
+    networks:
+      - alice-domain
+    volumes:
+      - ./playground/alice/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+      - ./libs:/workspace/libs
+    ports:
+      - "8888:8888"
+      - 3010:3010
+#    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
+#      actor-wallet-db:
+#        image: postgres:11
+#        container_name: actor-wallet-db
+#        command: postgres -c listen_addresses='*'
+#        # env file defines
+#        env_file:
+#          - playground/actor/.env
+#        volumes:
+#          - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+#        networks:
+#          - actor-domain
+#        tty: true
+#      actor-agent:
+#        build:
+#          context: .
+#          dockerfile: dockerfiles/Dockerfile.agent
+#        env_file:
+#          - playground/actor/.env
+#        ports:
+#          # HTTP_PORT
+#          - <UNIQUE_PORT>:3020
+#          # ADMIN_PORT
+#          - <UNIQUE_PORT>:3021
+#        depends_on:
+#          - actor-wallet-db
+#        networks:
+#          - actor-domain
+#      actor-business-logic:
+#        build:
+#          context: .
+#          dockerfile: dockerfiles/Dockerfile.controller
+#        env_file:
+#          - playground/actor/.env
+#        depends_on:
+#          - actor-agent
+#        networks:
+#          - actor-domain
+#        volumes:
+#          - ./playground/actor/notebooks:/workspace
+#          - ./recipes:/workspace/recipes
+#        ports:
+#          - 8890:8888
+#          # WEBHOOK_PORT
+#          - <UNIQUE_PORT>:3010
+##### UNCOMMENT FOR A TAILS SERVER ######
+# Note - for revocation to work you will have to make additional changes to the env files
+#  tails-server:
+#    env_file:
+#      - playground/alice/.env
+#    build:
+#      context: https://github.com/bcgov/indy-tails-server.git
+#      dockerfile: docker/Dockerfile.tails-server
+#    ports:
+#      - 6543:6543
+#    networks:
+#      - demo-participant-domain
+#      - hlgf-domain
+#    command: >
+#      tails-server
+#        --host 0.0.0.0
+#        --port 6543
+#        --storage-path /tmp/tails-files
+#        --log-level INFO
+networks:
+  alice-domain:
+  bob-domain:
