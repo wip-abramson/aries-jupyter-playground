@@ -68,6 +68,8 @@ DEFAULT_CONTAINERS="requestor-wallet-db ngrok-requestor requestor-agent requesto
                     mediator-wallet-db ngrok-mediator mediator-agent mediator-business-logic"
                     # tails-server"
 
+PRODUCTION_CONTAINERS="mediator-wallet-db mediator-agent mediator-business-logic"
+
 # DEFAULT_CONTAINERS="requestor-agent mediator-agent"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
