@@ -70,7 +70,6 @@ class MessagingService:
             
         
     def find_contact_by_id(self, connection_id):
-        contact_exists = False
         for contact in self.contacts:
             if contact.connection_id == connection_id:
                 return contact

@@ -32,20 +32,20 @@ class Contact:
             return view
         
     def display_inbox(self):
-        inbox_str = "-"*50
+        inbox_str = "-"*100
         inbox_str += "\n"
         inbox_str += f"Inbox for Contact {self.alias}"
         
         inbox_str += "\n"
-        inbox_str += "-"*50
+        inbox_str += "-"*100
         inbox_str += "\n"
         inbox_str += f"Connection ID : {self.connection_id} \nAgent Label : {self.agent_label} \nTotal Messages : {len(self.inbox)}"
         inbox_str += "\n"
-        inbox_str += "-"*50
+        inbox_str += "-"*100
         inbox_str += "\n"
-        inbox_str += "Received" + " "*38 + "Sent"
+        inbox_str += "Received" + " "*78 + "Sent"
         inbox_str += "\n"
-        inbox_str += "-"*50
+        inbox_str += "-"*100
         for message in self.inbox:
             inbox_str += "\n"
             inbox_str += message.to_string()
