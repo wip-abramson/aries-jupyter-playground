@@ -59,10 +59,12 @@ class MessagingService:
         if state == "active":
             their_label = payload["their_label"]
             contact = self.find_contact_by_id(connection_id)
+            print(colored("Connection with ID: {0} is now active.".format(connection_id), "green", attrs=["bold"]))
+
             if contact:
                 contact.is_active.set_result(True)
                 contact.agent_label = their_label
-                print(colored("Contact with ID: {0} and alias {1} is now active.".format(connection_id, contact.alias), "green", attrs=["bold"]))
+                print(f"Contact {contact.alias} Added")
             else:
                 print(f"No contact for active connection with ID {connection_id}")
                 
