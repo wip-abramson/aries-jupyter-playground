@@ -32,7 +32,6 @@ services:
       - playground/mediator/.env
     ports:
       - 6666:3020
-      - 3021:3021
     depends_on:
       - mediator-wallet-db
     networks:
@@ -53,7 +52,6 @@ services:
       - ./libs:/workspace/libs
     ports:
       - "8888:8888"
-      - 3010:3010
 #    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
 #      actor-wallet-db:
 #        image: postgres:11
