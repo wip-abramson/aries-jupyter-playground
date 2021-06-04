@@ -64,11 +64,11 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic
-                    alice-wallet-db ngrok-alice alice-agent alice-business-logic"
+DEFAULT_CONTAINERS="requestor-wallet-db ngrok-requestor requestor-agent requestor-business-logic
+                    mediator-wallet-db ngrok-mediator mediator-agent mediator-business-logic"
                     # tails-server"
 
-# DEFAULT_CONTAINERS="bob-agent alice-agent"
+# DEFAULT_CONTAINERS="requestor-agent mediator-agent"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
