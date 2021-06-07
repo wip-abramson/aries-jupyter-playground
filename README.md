@@ -10,8 +10,6 @@ This project uses Docker and docker-compose to support and simplify the arbitrar
 
 ## Requirements
 
-
-
 You need to install:
 1. [Docker](https://docs.docker.com/get-docker/)
 2. [docker-compose](https://docs.docker.com/compose/install/)
@@ -45,6 +43,10 @@ To stop the playground either:
 `./manage.sh stop` - this terminates the containers but persists the volumes. Specifically the agent wallet storage held in postgres-db's
 
 `./manage.sh down` - terminate containers and delete all volumes
+
+## Running on a VM
+
+See this [ansible playbook](https://github.com/wip-abramson/playground-ansible) and repository README for simplified instructions
 
 ## Writing Business Logic
 
