@@ -347,24 +347,24 @@ services:
 #          - <UNIQUE_PORT>:3010
 ##### UNCOMMENT FOR A TAILS SERVER ######
 # Note - for revocation to work you will have to make additional changes to the env files
-  tails-server:
-    build:
-      context: https://github.com/bcgov/indy-tails-server.git
-      dockerfile: docker/Dockerfile.tails-server
-    ports:
-      - 6543:6543
-    networks:
-      - edinburgh-medical-school-domain
-      - general-medical-council-domain
-      - healthcare-professional-domain
-      - scottish-deanery-domain
-      - rie-domain
-    command: >
-      tails-server
-        --host 0.0.0.0
-        --port 6543
-        --storage-path /tmp/tails-files
-        --log-level INFO
+#  tails-server:
+#    build:
+#      context: https://github.com/bcgov/indy-tails-server.git
+#      dockerfile: docker/Dockerfile.tails-server
+#    ports:
+#      - 6543:6543
+#    networks:
+#      - edinburgh-medical-school-domain
+#      - general-medical-council-domain
+#      - healthcare-professional-domain
+#      - scottish-deanery-domain
+#      - rie-domain
+#    command: >
+#      tails-server
+#        --host 0.0.0.0
+#        --port 6543
+#        --storage-path /tmp/tails-files
+#        --log-level INFO
 
 networks:
   edinburgh-medical-school-domain:
