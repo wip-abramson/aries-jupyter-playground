@@ -9,7 +9,7 @@ class Message:
         
     def to_string(self):
         msg_str = self.time.strftime("%c")
-        n = 25
+        n = 45
         words = self.content.split()
         
         msg_chunks = [self.content[i:i+n] for i in range(0, len(self.content), n)]
@@ -31,5 +31,5 @@ class Message:
             extra_space = " " * extra_space_count
             msg_str += (line_start + extra_space + current_line)
         msg_str += "\n"
-        msg_str += ("-"*50)
+        msg_str += ("-"*100)
         return msg_str

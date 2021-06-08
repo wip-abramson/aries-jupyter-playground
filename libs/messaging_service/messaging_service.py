@@ -4,7 +4,7 @@ import asyncio
 import nest_asyncio
 from termcolor import colored
 from .contact import Contact
-
+from .message import Message
 
 nest_asyncio.apply()
 
@@ -13,7 +13,7 @@ class MessagingService:
     def __init__(self, agent_controller):
         self.agent_controller = agent_controller
         self.contacts: list[Contact] = []
-        
+        self.save_file = "messaging-data.txt"
         listeners = [
             {
                 "handler": self._messages_handler,
@@ -156,5 +156,56 @@ class MessagingService:
         accept_response = loop.run_until_complete(self.agent_controller.connections.accept_invitation(connection_id, label, my_endpoint))
         return connection_id
 
+    
+    def save_to_file(self):
+        
+        data = {}
+        contacts = []
+        
+        for contact in self.contacts:
+            if contact.is_active.done() and contact.is_active.result():
+                inbox = []
+                for message in contact.inbox:
+                    
+                    message_dict = message.__dict__
+                    message_dict["time"] = message.time.isoformat()
+                    inbox.append(message_dict)
+                    
+                contact_dict = contact.__dict__
+                contact_dict["is_active"] = True
+                contact_dict["inbox"] = inbox
+                contacts.append(contact_dict)
+        
+                
+            
+
+        
+        data["contacts"] = contacts
+        
+        print("Saved Contacts Data \n", data)
+        with open(self.save_file, 'w') as outfile:
+            json.dump(data, outfile)
 
     
+    def load_from_file(self):
+
+        with open(self.save_file) as json_file:
+            data = json.load(json_file)
+            
+            for contact_dict in data["contacts"]:
+                
+                contact = Contact(contact_dict["connection_id"], contact_dict["alias"], contact_dict["agent_label"])
+                
+                contact.is_active.set_result(True)
+                
+                for message_dict in contact_dict["inbox"]:
+                    
+                    message = Message(message_dict["content"], message_dict["state"])
+                    
+                    message.time = datetime.fromisoformat(message_dict["time"])
+                    
+                    contact.inbox.append(message)
+                
+                self.contacts.append(contact)
+        
+        self.view_inbox()
