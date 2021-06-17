@@ -17,27 +17,27 @@ services:
   # wallet-db
   # a postgres database where agent data will be persisted unless you run ./manage down
   # ./manage stop with stop the containers but persist the database volumes
-  hlgf-wallet-db:
+  yoma-ga-wallet-db:
     image: postgres:11
-    container_name: hlgf-wallet-db
+    container_name: yoma-ga-wallet-db
     command: postgres -c listen_addresses='*'
     # env file defines
     env_file:
-      - playground/hlgf/.env
+      - playground/yoma-ga/.env
     # This creates the data base tables if not present. See resources/init.sql #
     volumes:
       - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - hlgf-domain
+      - yoma-ga-domain
   ### agent
-  # This is hlgf's ACA-Py instance
+  # This is yoma-ga's ACA-Py instance
   # See dockerfiles/Dockerfile.agent
-  hlgf-agent:
+  yoma-ga-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent.prod
     env_file:
-      - playground/hlgf/.env
+      - playground/yoma-ga/.env
     ## These map from ports defined in the .env file to unique ports on your machine
     ## YOUR_MACHINE:DOCKER_SERVICE
     ports:
@@ -46,26 +46,26 @@ services:
       # ADMIN_PORT
       - 4021:3021
     depends_on:
-      - hlgf-wallet-db
+      - yoma-ga-wallet-db
     networks:
-      - hlgf-domain
+      - yoma-ga-domain
   ### business-logic
   # This is where you will create notebooks to interact with your agent
   # This uses the aries-cloudcontroller pip package.
   # See dockerfiles/Dockerfile.controller
   # All business logic share a common set of code recipes to get you started
-  hlgf-business-logic:
+  yoma-ga-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/hlgf/.env
+      - playground/yoma-ga/.env
     depends_on:
-      - hlgf-agent
+      - yoma-ga-agent
     networks:
-      - hlgf-domain
+      - yoma-ga-domain
     volumes:
-      - ./playground/hlgf/notebooks:/workspace
+      - ./playground/yoma-ga/notebooks:/workspace
       - ./recipes:/workspace/recipes
       - ./libs:/workspace/libs
     ports:
@@ -173,7 +173,7 @@ services:
 #      - 6543:6543
 #    networks:
 #      - demo-participant-domain
-#      - hlgf-domain
+#      - yoma-ga-domain
 #    command: >
 #      tails-server
 #        --host 0.0.0.0
@@ -182,4 +182,4 @@ services:
 #        --log-level INFO
 networks:
   demo-participant-domain:
-  hlgf-domain:
+  yoma-ga-domain:
