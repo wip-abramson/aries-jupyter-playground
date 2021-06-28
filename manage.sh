@@ -64,14 +64,19 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="bob-wallet-db ngrok-bob bob-agent bob-business-logic
-                    alice-wallet-db ngrok-alice alice-agent alice-business-logic"
-                    # tails-server "
+DEFAULT_CONTAINERS="ngrok-holder holder-agent holder-business-logic
+                    ngrok-prover prover-agent prover-business-logic
+                    issuer-wallet-db ngrok-issuer issuer-agent issuer-business-logic
+                    verifier-wallet-db verifier-agent verifier-business-logic
+                    tails-server"
 
-PRODUCTION_CONTAINERS="bob-wallet-db bob-agent bob-business-logic
-                       alice-wallet-db alice-agent alice-business-logic"
+PRODUCTION_CONTAINERS="holder-agent holder-business-logic
+                       prover-agent prover-business-logic
+                       issuer-wallet-db issuer-agent issuer-business-logic
+                       verifier-wallet-db verifier-agent verifier-business-logic
+                       tails-server"
 
-# DEFAULT_CONTAINERS="bob-agent alice-agent"
+# DEFAULT_CONTAINERS="holder-agent issuer-agent"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------

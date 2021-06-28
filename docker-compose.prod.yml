@@ -14,31 +14,15 @@
 version: "3"
 services:
   ##### Bob Services #####
-  # wallet-db
-  # a postgres database where agent data will be persisted unless you run ./manage down
-  # ./manage stop with stop the containers but persist the database volumes
-  bob-wallet-db:
-    image: postgres:11
-    container_name: bob-wallet-db
-    command: postgres -c listen_addresses='*'
-    # env file defines
-    env_file:
-      - playground/bob/.env
-    # This creates the data base tables if not present. See resources/init.sql #
-    volumes:
-      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - bob-domain
-    tty: true
   ### agent
-  # This is bob's ACA-Py instance
+  # This is holder's ACA-Py instance
   # See dockerfiles/Dockerfile.agent
-  bob-agent:
+  holder-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent.prod
     env_file:
-      - playground/bob/.env
+      - playground/holder/.env
     ## These map from ports defined in the .env file to unique ports on your machine
     ## YOUR_MACHINE:DOCKER_SERVICE
     ports:
@@ -46,77 +30,154 @@ services:
       - 4020:3020
       # ADMIN_PORT
       - 4021:3021
-    depends_on:
-      - bob-wallet-db
+    volumes:
+        - ./playground/holder/logs:/home/indy/logs
     networks:
-      - bob-domain
+      - indy-network
   ### business-logic
   # This is where you will create notebooks to interact with your agent
   # This uses the aries-cloudcontroller pip package.
   # See dockerfiles/Dockerfile.controller
   # All business logic share a common set of code recipes to get you started
-  bob-business-logic:
+  holder-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/bob/.env
+      - playground/holder/.env
     depends_on:
-      - bob-agent
-    networks:
-      - bob-domain
+      - holder-agent
     volumes:
-      - ./playground/bob/notebooks:/workspace
+      - ./playground/holder/notebooks:/workspace
       - ./recipes:/workspace/recipes
       - ./libs:/workspace/libs
+    networks:
+      - indy-network
     ports:
       # Jupyter Notebook port - always map from 8888 to any available port
       - 8889:8888
       # WEBHOOK_PORT
       - 4010:3010
-  #########################################################################
-  #### Alice Services
-  alice-wallet-db:
-    image: postgres:11
-    container_name: alice-wallet-db
-    command: postgres -c listen_addresses='*'
-    env_file:
-      - playground/alice/.env
-    volumes:
-      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - alice-domain
-    tty: true
-  alice-agent:
+  prover-agent:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.agent.prod
     env_file:
-      - playground/alice/.env
+      - playground/prover/.env
     ports:
-      - 3020:3020
-      - 3021:3021
-    depends_on:
-      - alice-wallet-db
+      # HTTP_PORT
+      - 5020:3020
+      # ADMIN_PORT
+      - 5021:3021
+    volumes:
+      - ./playground/prover/logs:/home/indy/logs
     networks:
-      - alice-domain
-  alice-business-logic:
+      - indy-network
+  prover-business-logic:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.controller
     env_file:
-      - playground/alice/.env
+      - playground/prover/.env
     depends_on:
-      - alice-agent
+      - prover-agent
     networks:
-      - alice-domain
+      - indy-network
     volumes:
-      - ./playground/alice/notebooks:/workspace
+      - ./playground/prover/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8890:8888
+      # WEBHOOK_PORT
+      - 5010:3010
+  #########################################################################
+  #### Alice Services
+  issuer-wallet-db:
+    image: postgres:11
+    container_name: issuer-wallet-db
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - playground/issuer/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    tty: true
+    networks:
+      - indy-network
+  issuer-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/issuer/.env
+    ports:
+      - 3020:3020
+      - 3021:3021
+    volumes:
+        - ./playground/issuer/logs:/home/indy/logs
+    networks:
+      - indy-network
+    depends_on:
+      - issuer-wallet-db
+  issuer-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/issuer/.env
+    depends_on:
+      - issuer-agent
+    networks:
+      - indy-network
+    volumes:
+      - ./playground/issuer/notebooks:/workspace
       - ./recipes:/workspace/recipes
       - ./libs:/workspace/libs
     ports:
       - "8888:8888"
       - 3010:3010
+  verifier-wallet-db:
+    image: postgres:11
+    container_name: verifier-wallet-db
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - playground/verifier/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    tty: true
+    networks:
+      - indy-network
+  verifier-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/verifier/.env
+    ports:
+      - 6020:3020
+      - 6021:3021
+    volumes:
+      - ./playground/verifier/logs:/home/indy/logs
+    networks:
+      - indy-network
+    depends_on:
+      - verifier-wallet-db
+  verifier-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/verifier/.env
+    depends_on:
+      - verifier-agent
+    networks:
+      - indy-network
+    volumes:
+      - ./playground/verifier/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+      - ./libs:/workspace/libs
+    ports:
+      - "8891:8888"
+      - 6010:3010
 #    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
 #      actor-wallet-db:
 #        image: postgres:11
@@ -164,23 +225,21 @@ services:
 #          - <UNIQUE_PORT>:3010
 ##### UNCOMMENT FOR A TAILS SERVER ######
 # Note - for revocation to work you will have to make additional changes to the env files
-#  tails-server:
-#    env_file:
-#      - playground/alice/.env
-#    build:
-#      context: https://github.com/bcgov/indy-tails-server.git
-#      dockerfile: docker/Dockerfile.tails-server
-#    ports:
-#      - 6543:6543
-#    networks:
-#      - demo-participant-domain
-#      - hlgf-domain
-#    command: >
-#      tails-server
-#        --host 0.0.0.0
-#        --port 6543
-#        --storage-path /tmp/tails-files
-#        --log-level INFO
+  tails-server:
+    env_file:
+      - playground/issuer/.env
+    build:
+      context: https://github.com/bcgov/indy-tails-server.git
+      dockerfile: docker/Dockerfile.tails-server
+    ports:
+      - 6543:6543
+    networks:
+      - indy-network
+    command: >
+      tails-server
+        --host 0.0.0.0
+        --port 6543
+        --storage-path /tmp/tails-files
+        --log-level INFO
 networks:
-  alice-domain:
-  bob-domain:
+  indy-network:

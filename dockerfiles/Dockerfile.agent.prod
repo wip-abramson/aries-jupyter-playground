@@ -13,6 +13,8 @@ RUN chmod +x ./jq
 COPY scripts/startup-prod.sh startup.sh
 RUN chmod +x ./startup.sh
 
+ADD resources/von-local-genesis-txns von-local-genesis-txns
+
 
 USER $user
 

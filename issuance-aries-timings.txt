@@ -1,0 +1,22 @@
+ConnectionManager.get_connection_targets 36867.60030 0.00087
+credential_exchange_send 36867.34896 0.26516
+credential_exchange_send 36867.35232 0.26522
+outbound-http:POST 36867.60077 0.05439
+PackWireFormat.pack 36867.62142 0.17722
+outbound-http:POST 36867.81434 0.16355
+PackWireFormat.unpack 36868.12120 0.00878
+ConnectionManager.find_inbound_connection 36868.13506 0.00519
+outbound-http:POST 36868.44580 0.01124
+ConnectionManager.get_connection_targets 36868.83577 0.00132
+Conductor.outbound_message_router 36868.81339 0.02391
+CredentialRequestHandler.handle 36868.14040 0.69736
+Dispatcher.handle_message 36868.13546 0.70763
+outbound-http:POST 36868.83672 0.05341
+PackWireFormat.pack 36868.84366 0.21533
+outbound-http:POST 36869.07309 0.20084
+PackWireFormat.unpack 36869.76008 0.00449
+ConnectionManager.find_inbound_connection 36869.76772 0.00534
+CredentialAckHandler.handle 36869.77318 0.39305
+Dispatcher.handle_message 36869.76516 0.40170
+outbound-http:POST 36870.16255 0.00876
+
