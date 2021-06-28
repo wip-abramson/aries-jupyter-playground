@@ -10,6 +10,6 @@ build
 __pycache__/
 
 .vscode/
-*/logs
+logs/
 
-*/results
+results/
