@@ -1,4 +1,4 @@
-FROM bcgovimages/von-image:py36-1.16-0
+FROM bcgovimages/aries-cloudagent:py36-1.16-1_0.7.0rc0
 #FROM bcgovimages/aries-cloudagent:py36-1.15-1_0.6.0
 
 
@@ -6,8 +6,6 @@ USER root
 RUN apt-get update
 RUN apt-get update && apt-get install -y gcc
 
-
-RUN pip3 install aries-cloudagent
 
 ADD https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 ./jq
 RUN chmod +x ./jq
@@ -20,4 +18,5 @@ ADD resources/von-local-genesis-txns von-local-genesis-txns
 
 USER $user
 
+ENTRYPOINT ["/usr/bin/env"]
 CMD ./wait.sh ./startup.sh
