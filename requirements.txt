@@ -1,2 +1,3 @@
 termcolor
-aries_cloudcontroller>=0.2.6
+
+git+git://github.com/didx-xyz/aries-cloudcontroller-python@main#egg=aries-cloudcontroller
