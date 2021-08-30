@@ -67,10 +67,12 @@ DEFAULT_CONTAINERS="general-medical-council-wallet-db ngrok-general-medical-coun
                     edinburgh-medical-school-wallet-db ngrok-edinburgh-medical-school edinburgh-medical-school-agent edinburgh-medical-school-business-logic
                     rie-wallet-db ngrok-rie rie-agent rie-business-logic
                     ngrok-healthcare-professional healthcare-professional-agent healthcare-professional-business-logic
-                    scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic"
-                    # tails-server"
+                    scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic
+                    tails-server"
 
-# DEFAULT_CONTAINERS="general-medical-council-agent edinburgh-medical-school-agent"
+#DEFAULT_CONTAINERS="general-medical-council-agent edinburgh-medical-school-agent
+#                    ngrok-healthcare-professional healthcare-professional-agent healthcare-professional-business-logic
+#                    scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
