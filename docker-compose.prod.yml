@@ -58,38 +58,6 @@ services:
       - 8889:8888
       # WEBHOOK_PORT
       - 4010:3010
-  prover-agent:
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.agent.prod
-    env_file:
-      - playground/prover/.env
-    ports:
-      # HTTP_PORT
-      - 5020:3020
-      # ADMIN_PORT
-      - 5021:3021
-    volumes:
-      - ./playground/prover/logs:/home/indy/logs
-    networks:
-      - indy-network
-  prover-business-logic:
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.controller
-    env_file:
-      - playground/prover/.env
-    depends_on:
-      - prover-agent
-    networks:
-      - indy-network
-    volumes:
-      - ./playground/prover/notebooks:/workspace
-      - ./recipes:/workspace/recipes
-    ports:
-      - 8890:8888
-      # WEBHOOK_PORT
-      - 5010:3010
   #########################################################################
   #### Alice Services
   issuer-wallet-db:

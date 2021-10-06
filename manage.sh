@@ -65,16 +65,12 @@ EOF
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
 DEFAULT_CONTAINERS="ngrok-holder holder-agent holder-business-logic
-                    ngrok-prover prover-agent prover-business-logic
                     issuer-wallet-db ngrok-issuer issuer-agent issuer-business-logic
-                    ngrok-verifier verifier-wallet-db verifier-agent verifier-business-logic
-                    tails-server"
+                    ngrok-verifier verifier-wallet-db verifier-agent verifier-business-logic"
 
 PRODUCTION_CONTAINERS="holder-agent holder-business-logic
-                       prover-agent prover-business-logic
                        issuer-wallet-db issuer-agent issuer-business-logic
-                       verifier-wallet-db verifier-agent verifier-business-logic
-                       tails-server"
+                       verifier-wallet-db verifier-agent verifier-business-logic"
 
 # DEFAULT_CONTAINERS="holder-agent issuer-agent"
 # -----------------------------------------------------------------------------------------------------------------

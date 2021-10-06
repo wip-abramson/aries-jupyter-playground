@@ -124,42 +124,6 @@ services:
     ports:
       - "8888:8888"
       - 3010:3010
-#    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
-  ngrok-prover:
-    image: wernight/ngrok
-    command: ngrok http prover-agent:3020 --log stdout
-    networks:
-      - prover-domain
-  prover-agent:
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.agent
-    env_file:
-      - playground/prover/.env
-    ports:
-      # HTTP_PORT
-      - 5020:3020
-      # ADMIN_PORT
-      - 5021:3021
-    networks:
-      - prover-domain
-  prover-business-logic:
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.controller
-    env_file:
-      - playground/prover/.env
-    depends_on:
-      - prover-agent
-    networks:
-      - prover-domain
-    volumes:
-      - ./playground/prover/notebooks:/workspace
-      - ./recipes:/workspace/recipes
-    ports:
-      - 8890:8888
-      # WEBHOOK_PORT
-      - 5010:3010
   ngrok-verifier:
     image: wernight/ngrok
     command: ngrok http verifier-agent:3020 --log stdout
@@ -208,27 +172,76 @@ services:
     ports:
       - "8891:8888"
       - 6010:3010
+  #    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
+  #      ngrok-actor:
+  #       image: wernight/ngrok
+  #       command: ngrok http actor-agent:3020 --log stdout
+  #      networks:
+  #       - actor-domain
+  #      actor-wallet-db:
+  #        image: postgres:11
+  #        container_name: actor-wallet-db
+  #        command: postgres -c listen_addresses='*'
+  #        # env file defines
+  #        env_file:
+  #          - playground/actor/.env
+  #        volumes:
+  #          - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #        networks:
+  #          - actor-domain
+  #        tty: true
+  #      actor-agent:
+  #        build:
+  #          context: .
+  #          dockerfile: dockerfiles/Dockerfile.agent
+  #        env_file:
+  #          - playground/actor/.env
+  #        ports:
+  #          # HTTP_PORT
+  #          - <UNIQUE_PORT>:3020
+  #          # ADMIN_PORT
+  #          - <UNIQUE_PORT>:3021
+  #        depends_on:
+  #          - actor-wallet-db
+  #        networks:
+  #          - actor-domain
+  #      actor-business-logic:
+  #        build:
+  #          context: .
+  #          dockerfile: dockerfiles/Dockerfile.controller
+  #        env_file:
+  #          - playground/actor/.env
+  #        depends_on:
+  #          - actor-agent
+  #        networks:
+  #          - actor-domain
+  #        volumes:
+  #          - ./playground/actor/notebooks:/workspace
+  #          - ./recipes:/workspace/recipes
+  #        ports:
+  #          - 8890:8888
+  #          # WEBHOOK_PORT
+  #          - <UNIQUE_PORT>:3010
 ##### UNCOMMENT FOR A TAILS SERVER ######
 # Note - for revocation to work you will have to make additional changes to the env files
-  tails-server:
-    env_file:
-      - playground/issuer/.env
-    build:
-      context: https://github.com/bcgov/indy-tails-server.git
-      dockerfile: docker/Dockerfile.tails-server
-    ports:
-      - 6543:6543
-    networks:
-      - issuer-domain
-      - holder-domain
-      - prover-domain
-      - verifier-domain
-    command: >
-      tails-server
-        --host 0.0.0.0
-        --port 6543
-        --storage-path /tmp/tails-files
-        --log-level INFO
+#  tails-server:
+#    env_file:
+#      - playground/issuer/.env
+#    build:
+#      context: https://github.com/bcgov/indy-tails-server.git
+#      dockerfile: docker/Dockerfile.tails-server
+#    ports:
+#      - 6543:6543
+#    networks:
+#      - issuer-domain
+#      - holder-domain
+#      - verifier-domain
+#    command: >
+#      tails-server
+#        --host 0.0.0.0
+#        --port 6543
+#        --storage-path /tmp/tails-files
+#        --log-level INFO
 networks:
   issuer-domain:
   holder-domain:
