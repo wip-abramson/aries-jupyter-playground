@@ -160,6 +160,54 @@ services:
       - 8890:8888
       # WEBHOOK_PORT
       - 5010:3010
+  ngrok-verifier:
+    image: wernight/ngrok
+    command: ngrok http verifier-agent:3020 --log stdout
+    networks:
+      - verifier-domain
+  verifier-wallet-db:
+    image: postgres:11
+    container_name: verifier-wallet-db
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - playground/verifier/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    tty: true
+    networks:
+      - verifier-domain
+  verifier-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent
+    env_file:
+      - playground/verifier/.env
+    ports:
+      - 6020:3020
+      - 6021:3021
+    volumes:
+      - ./playground/verifier/logs:/home/indy/logs
+    networks:
+      - verifier-domain
+    depends_on:
+      - verifier-wallet-db
+  verifier-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/verifier/.env
+    depends_on:
+      - verifier-agent
+    networks:
+      - verifier-domain
+    volumes:
+      - ./playground/verifier/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+      - ./libs:/workspace/libs
+    ports:
+      - "8891:8888"
+      - 6010:3010
 ##### UNCOMMENT FOR A TAILS SERVER ######
 # Note - for revocation to work you will have to make additional changes to the env files
   tails-server:
@@ -174,6 +222,7 @@ services:
       - issuer-domain
       - holder-domain
       - prover-domain
+      - verifier-domain
     command: >
       tails-server
         --host 0.0.0.0
@@ -184,3 +233,4 @@ networks:
   issuer-domain:
   holder-domain:
   prover-domain:
+  verifier-domain:

@@ -67,7 +67,7 @@ EOF
 DEFAULT_CONTAINERS="ngrok-holder holder-agent holder-business-logic
                     ngrok-prover prover-agent prover-business-logic
                     issuer-wallet-db ngrok-issuer issuer-agent issuer-business-logic
-                    verifier-wallet-db verifier-agent verifier-business-logic
+                    ngrok-verifier verifier-wallet-db verifier-agent verifier-business-logic
                     tails-server"
 
 PRODUCTION_CONTAINERS="holder-agent holder-business-logic
