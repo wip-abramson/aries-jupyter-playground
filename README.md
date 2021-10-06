@@ -73,6 +73,13 @@ Feel free to customise Alice and Bob aswell. It makes sense to name your actors 
 
 Each agent instance has it's own environment file e.g. `alice/.alice-example.env`. These define default ACA-PY environment variables, which are best understood by reading through the code that parses them. This can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/main/aries_cloudagent/config/argparse.py).
 
+**Note: If ACAPY_WALLET_SEED is set in the environment file then it MUST be authored to the ledger before starting the agent.**
+
+Otherwise you will see an error that looks like this:
+
+`aries_cloudagent.config.base.ConfigError: Ledger rejected transaction request: client request invalid: could not authenticate, verkey for H7zAaLJRZrdbPqbVMMfL5t cannot be found
+`
+
 ## Using Different Indy Networks
 
 An aries agent points to the indy network it wishes to use to write and resolve cryptographic objects to and from. All actors in the flow should use the same network - See the ACA_PY_GENESIS_URL argument in .env files.
