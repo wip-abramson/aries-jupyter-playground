@@ -2,3 +2,4 @@ termcolor
 aries_cloudcontroller==0.2.6
 matplotlib
 numpy
+qrcode[pil]
