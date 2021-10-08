@@ -1,3 +1,3 @@
 termcolor
 
-git+git://github.com/didx-xyz/aries-cloudcontroller-python@main#egg=aries-cloudcontroller
+git+git://github.com/didx-xyz/aries-cloudcontroller-python@feature/tx-endorser#egg=aries-cloudcontroller
