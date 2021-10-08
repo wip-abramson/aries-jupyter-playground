@@ -70,6 +70,13 @@ DEFAULT_CONTAINERS="general-medical-council-wallet-db ngrok-general-medical-coun
                     scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic
                     tails-server"
 
+PRODUCTION_CONTAINERS="general-medical-council-wallet-db general-medical-council-agent general-medical-council-business-logic
+                    edinburgh-medical-school-wallet-db edinburgh-medical-school-agent edinburgh-medical-school-business-logic
+                    rie-wallet-db rie-agent rie-business-logic
+                    healthcare-professional-agent healthcare-professional-business-logic
+                    scottish-deanery-wallet-db scottish-deanery-agent scottish-deanery-business-logic
+                    tails-server"
+
 #DEFAULT_CONTAINERS="general-medical-council-agent edinburgh-medical-school-agent
 #                    ngrok-healthcare-professional healthcare-professional-agent healthcare-professional-business-logic
 #                    scottish-deanery-wallet-db ngrok-scottish-deanery scottish-deanery-agent scottish-deanery-business-logic"

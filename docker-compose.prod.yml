@@ -1,0 +1,343 @@
+######################################################################################
+#############   Aries ACA-Py ACC-Py Jupyter Playground Configuration   ###############
+######################################################################################
+##### The example configuration defines services for two actors: Alice and Bob   #####
+##### A template for the set of actor actor is provided below these              #####
+##### Uncomment and customise as you like                                        #####
+##### You will need to create a folder under playground for this actor           #####
+##### Copy the template playground/actor folder to get started                   #####
+##### This contains an empty notebooks folder and a template dummy.env file      #####
+##### The notebooks folder will be mounted in the jupyter workspace              #####
+##### You need to customise the dummy.env file and rename it to .env             #####
+##### Change any variables enclosed with < > e.g. ENV=<actor>                    #####
+##### You do not need to change the ports - each agent runs on it's own container ####
+##### Make sure you map the ports in the env file to unique ports on your machine ####
+##### All the docker services use this file                                      #####
+##### Add any defined services to the DEFAULT_CONTAINERS arg in the manage file  #####
+######################################################################################
+version: "3"
+services:
+  ##### GMC Services #####
+  # wallet-db
+  # a postgres database where agent data will be persisted unless you run ./manage down
+  # ./manage stop with stop the containers but persist the database volumes
+  general-medical-council-wallet-db:
+    image: postgres:11
+    container_name: general-medical-council-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/general-medical-council/.env
+    # This creates the data base tables if not present. See resources/init.sql #
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - global-prod
+    tty: true
+  ### agent
+  # This is general-medical-council's ACA-Py instance
+  # See dockerfiles/Dockerfile.agent.prod
+  general-medical-council-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/general-medical-council/.env
+    ## These map from ports defined in the .env file to unique ports on your machine
+    ## YOUR_MACHINE:DOCKER_SERVICE
+    ports:
+      # HTTP_PORT
+      - 4020:3020
+      # ADMIN_PORT
+      - 4021:3021
+    depends_on:
+      - general-medical-council-wallet-db
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/general-medical-council/logs:/home/indy/logs
+
+  ### business-logic
+  # This is where you will create notebooks to interact with your agent
+  # This uses the aries-cloudcontroller pip package.
+  # See dockerfiles/Dockerfile.controller
+  # All business logic share a common set of code recipes to get you started
+  general-medical-council-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/general-medical-council/.env
+    depends_on:
+      - general-medical-council-agent
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/general-medical-council/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      # Jupyter Notebook port - always map from 8888 to any available port
+      - 8889:8888
+      # WEBHOOK_PORT
+      - 4010:3010
+  #########################################################################
+  edinburgh-medical-school-wallet-db:
+    image: postgres:11
+    container_name: edinburgh-medical-school-wallet-db
+    command: postgres -c listen_addresses='*'
+    env_file:
+      - playground/edinburgh-medical-school/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - global-prod
+    tty: true
+#  ngrok-edinburgh-medical-school:
+#    image: wernight/ngrok
+#    env_file:
+#      - playground/edinburgh-medical-school/.env
+#    command: ngrok http edinburgh-medical-school-agent:3020 --log stdout
+#    networks:
+#      - edinburgh-medical-school-domain
+  edinburgh-medical-school-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/edinburgh-medical-school/.env
+    ports:
+      - 3020:3020
+      - 3021:3021
+    depends_on:
+      - edinburgh-medical-school-wallet-db
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/edinburgh-medical-school/logs:/home/indy/logs
+  edinburgh-medical-school-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/edinburgh-medical-school/.env
+    depends_on:
+      - edinburgh-medical-school-agent
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/edinburgh-medical-school/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - "8888:8888"
+      - 3010:3010
+  healthcare-professional-wallet-db:
+    image: postgres:11
+    container_name: healthcare-professional-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/healthcare-professional/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - global-prod
+    tty: true
+  healthcare-professional-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/healthcare-professional/.env
+    ports:
+      # HTTP_PORT
+      - 6020:3020
+      # ADMIN_PORT
+      - 6021:3021
+    depends_on:
+      - healthcare-professional-wallet-db
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/healthcare-professional/logs:/home/indy/logs
+
+  healthcare-professional-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/healthcare-professional/.env
+    depends_on:
+      - healthcare-professional-agent
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/healthcare-professional/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8890:8888
+      # WEBHOOK_PORT
+      - 6010:3010
+  rie-wallet-db:
+    image: postgres:11
+    container_name: rie-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - global-prod
+    tty: true
+  rie-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    ports:
+      # HTTP_PORT
+      - 9020:3020
+      # ADMIN_PORT
+      - 9021:3021
+    depends_on:
+      - rie-wallet-db
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/royal-infirmary-edinburgh/logs:/home/indy/logs
+  rie-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/royal-infirmary-edinburgh/.env
+    depends_on:
+      - rie-agent
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/royal-infirmary-edinburgh/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8893:8888
+      # WEBHOOK_PORT
+      - 9010:3010
+  scottish-deanery-wallet-db:
+    image: postgres:11
+    container_name: scottish-deanery-wallet-db
+    command: postgres -c listen_addresses='*'
+    # env file defines
+    env_file:
+      - playground/scottish-deanery/.env
+    volumes:
+      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - global-prod
+    tty: true
+  scottish-deanery-agent:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.agent.prod
+    env_file:
+      - playground/scottish-deanery/.env
+    ports:
+      # HTTP_PORT
+      - 1020:3020
+      # ADMIN_PORT
+      - 1021:3021
+    depends_on:
+      - scottish-deanery-wallet-db
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/scottish-deanery/logs:/home/indy/logs
+  scottish-deanery-business-logic:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.controller
+    env_file:
+      - playground/scottish-deanery/.env
+    depends_on:
+      - scottish-deanery-agent
+    networks:
+      - global-prod
+    volumes:
+      - ./playground/scottish-deanery/notebooks:/workspace
+      - ./recipes:/workspace/recipes
+    ports:
+      - 8895:8888
+      # WEBHOOK_PORT
+      - 1010:3010
+#    #### ACTOR TEMPLATE SERVICES - Uncomment and edit as appropriate ######
+#      actor-wallet-db:
+#        image: postgres:11
+#        container_name: actor-wallet-db
+#        command: postgres -c listen_addresses='*'
+#        # env file defines
+#        env_file:
+#          - playground/actor/.env
+#        volumes:
+#          - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+#        networks:
+#          - actor-domain
+#        tty: true
+#      ngrok-actor:
+#        image: wernight/ngrok
+#        command: ngrok http actor-agent:3020 --log stdout
+#        networks:
+#          - actor-domain
+#      actor-agent:
+#        build:
+#          context: .
+#          dockerfile: dockerfiles/Dockerfile.agent.prod
+#        env_file:
+#          - playground/actor/.env
+#        ports:
+#          # HTTP_PORT
+#          - <UNIQUE_PORT>:3020
+#          # ADMIN_PORT
+#          - <UNIQUE_PORT>:3021
+#        depends_on:
+#          - actor-wallet-db
+#        networks:
+#          - actor-domain
+#      actor-business-logic:
+#        build:
+#          context: .
+#          dockerfile: dockerfiles/Dockerfile.controller
+#        env_file:
+#          - playground/actor/.env
+#        depends_on:
+#          - actor-agent
+#        networks:
+#          - actor-domain
+#        volumes:
+#          - ./playground/actor/notebooks:/workspace
+#          - ./recipes:/workspace/recipes
+#        ports:
+#          - 8890:8888
+#          # WEBHOOK_PORT
+#          - <UNIQUE_PORT>:3010
+##### UNCOMMENT FOR A TAILS SERVER ######
+# Note - for revocation to work you will have to make additional changes to the env files
+  tails-server:
+    build:
+      context: https://github.com/bcgov/indy-tails-server.git
+      dockerfile: docker/Dockerfile.tails-server
+    ports:
+      - 6543:6543
+    networks:
+      - global-prod
+    volumes:
+      - ./tmp/tails-files:/tmp/tails-files:z
+    command: >
+      tails-server
+        --host 0.0.0.0
+        --port 6543
+        --storage-path /tmp/tails-files
+        --log-level INFO
+
+
+networks:
+  global-prod:
