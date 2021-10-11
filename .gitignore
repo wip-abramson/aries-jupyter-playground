@@ -12,6 +12,6 @@ __pycache__/
 
 .vscode/
 
-*/logs/*
+**/logs/*
 
 agent_logs.txt
