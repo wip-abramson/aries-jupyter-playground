@@ -1,4 +1,4 @@
-# Aries ACA-Py Jupyter Playground
+# Aries ACA-Py Jupyter Playground - Scottish Healthcare Identification Ecosystem
 
 ## A Jupyter Notebook Based Playground for Education and Experimentation with Hyperledger Aries
 
@@ -18,17 +18,39 @@ Verify that **s2i** is in your PATH.  If not, then edit your PATH and add the di
 
 Ensure that Docker is running. If it is not try `sudo dockerd` in another terminal.
 
-## Starting the Playground
+## Starting the Scottish Healthcare Identification Ecosystem 
 
-This playground comes with example configuration of two actors Alice and Bob.
+This proof of concept simulates the identification processes that a healthcare professional goes through as they graduate from medical school, become a licenced professional and onboard at a new hospital.
 
-Before you can launch the playground you must set the .env file for each of Alice and Bob. The file should be under `playground/<agent_name>/.env`. 
+This figure shows the actors, credentials and interactions modelled in this playground
 
-For quick start just copy the example env files provided (e.g. bob-example.env) and rename them to .env.
+![Scottish Healthcare Identification Ecosystem](./shs-cred-deps.png)
 
-Then run:
+There are 5 actors (see the playground folder). Also feel free to add more by copying and editing the actor template.
 
-`./manage.sh start`
+Before you can launch the playground you must set the .env file for each of actor. The file should be under `playground/<agent_name>/.env`. 
+
+For quick start just copy the example env files provided under each actor in the playground (example.env) and rename them to .env.
+
+### Start a local von-network
+
+**This POC uses a local von-network. You must start this separately from this playground. (or alternatively edit the .env files to point at a different ledger)**
+
+Clone and run the von network following instructions in the repo - https://github.com/bcgov/von-network
+
+### Register Public DIDs
+
+You will need to manually register the public DIDs for the respective agents on the local von network which should be running at http://localhost:9000.
+
+Use the form on the web interface to register the ACAPY_WALLET_SEED defined in each of the actors .env file.
+
+Note: healthcare-professional does not have one defined as they will not be issuing any credentials.
+
+### Launch the playground
+
+Run:
+
+`./manage.sh production`
 
 This spins up all docker containers defined in the `docker-compose.yml` file and named in the DEFAULT_CONTAINERS variable defined in the `manage.sh` shell script.
 
