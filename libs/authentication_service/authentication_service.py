@@ -121,6 +121,7 @@ class AuthenticationService:
                         connection.self_attested_attributes.append({"name": attr_name, "value": val})
 
                     print(f"Successfully verified presentation from connection {connection_id}. Connection now trusted.")
+                    connection.is_trusted.set_result(True)
 
 
     def new_connection_invitation(self, proof_request: TypeDict = None, for_mobile: bool = False) -> TypeDict:

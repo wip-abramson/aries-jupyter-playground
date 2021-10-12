@@ -1,4 +1,4 @@
-# Aries ACA-Py Jupyter Playground: Hyperledger Global Forum Demo
+# Aries ACA-Py Jupyter Playground: IIW Demo
 
 ## A Jupyter Notebook Based Playground for Education and Experimentation with Hyperledger Aries
 
@@ -6,9 +6,12 @@ Design, describe and implement actors and interactions involving the verifiable 
 
 This project uses Docker and docker-compose to support and simplify the arbitrary configuration of actors within a SSI ecosystem. As an learner, experimenter or explorer using this playground you get to focus on writing business logic in python through a Jupyter notebook interface that uses the aries-cloudcontroller to interface with the actors respective ACA-Py agent. Either by sending API requests to their exposed Swagger-API or receiving events from this agent posted to a webhook server that you can run within the notebook.
 
+
 ![Playground Architecture](./system-architecture.png)
 
 ## Requirements
+
+This project is written in Python and is displayed in jupyter notebooks.
 
 You need to install:
 1. [Docker](https://docs.docker.com/get-docker/)
@@ -44,10 +47,6 @@ To stop the playground either:
 
 `./manage.sh down` - terminate containers and delete all volumes
 
-## Running on a VM
-
-See this [ansible playbook](https://github.com/wip-abramson/playground-ansible) and repository README for simplified instructions
-
 ## Writing Business Logic
 
 The aim of this respository is to simplify the process by which you can spin up a set of actors specific to a domain and start to experiment with relevant information exchanges using the Hyperledger verifiable information exchange platform.
@@ -73,6 +72,13 @@ Feel free to customise Alice and Bob aswell. It makes sense to name your actors 
 ## ACA-Py Agent Configuration
 
 Each agent instance has it's own environment file e.g. `alice/.alice-example.env`. These define default ACA-PY environment variables, which are best understood by reading through the code that parses them. This can be found [here](https://github.com/hyperledger/aries-cloudagent-python/blob/main/aries_cloudagent/config/argparse.py).
+
+**Note: If ACAPY_WALLET_SEED is set in the environment file then it MUST be authored to the ledger before starting the agent.**
+
+Otherwise you will see an error that looks like this:
+
+`aries_cloudagent.config.base.ConfigError: Ledger rejected transaction request: client request invalid: could not authenticate, verkey for H7zAaLJRZrdbPqbVMMfL5t cannot be found
+`
 
 ## Using Different Indy Networks
 

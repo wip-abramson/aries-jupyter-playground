@@ -1,4 +1,4 @@
 termcolor
-aries_cloudcontroller>=0.2.6
+aries_cloudcontroller==0.2.6
 qrcode[pil]
 pillow
