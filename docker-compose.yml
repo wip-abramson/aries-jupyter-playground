@@ -76,7 +76,6 @@ services:
   #### Alice Services
   issuer-wallet-db:
     image: postgres:11
-    container_name: issuer-wallet-db
     command: postgres -c listen_addresses='*'
     env_file:
       - playground/issuer/.env
@@ -245,5 +244,4 @@ services:
 networks:
   issuer-domain:
   holder-domain:
-  prover-domain:
   verifier-domain:
